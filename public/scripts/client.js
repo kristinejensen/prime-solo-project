@@ -1,3 +1,28 @@
+var app = angular.module('ConnectApp', ['ngRoute','firebase']);
+
+app.config(['$routeProvider', function($routeProvider) {
+  $routeProvider
+  .when('/home', {
+    templateUrl: 'views/home.html',
+    controller: 'HomeController',
+    controllerAs: 'hc'
+  })
+  .when('/volunteers', {
+    templateUrl: 'views/volunteers.html',
+    controller: 'VolunteerController',
+    controllerAs: 'vc'
+  })
+  .when('/nonprofits', {
+    templateUrl: 'views/nonprofits.html',
+    controller: 'NonprofitController',
+    controllerAs: 'nc'
+  })
+  .otherwise({
+    redirectTo: 'home'
+  })
+}]); // end of app.config
+
+
 var app = angular.module("sampleApp", ["firebase"]);
 app.controller("SampleCtrl", function($firebaseAuth, $http) {
   var auth = $firebaseAuth();
