@@ -17,13 +17,17 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'NonprofitController',
     controllerAs: 'nc'
   })
+  .when('/volunteer-profile', {
+    templateUrl: 'views/volunteer-profile.html',
+    controller: 'VolunteerProfileController',
+    controllerAs: 'np'
+  })
   .otherwise({
     redirectTo: 'home'
   })
 }]); // end of app.config
 
 
-var app = angular.module("sampleApp", ["firebase"]);
 app.controller("SampleCtrl", function($firebaseAuth, $http) {
   var auth = $firebaseAuth();
   var self = this;

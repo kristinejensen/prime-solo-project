@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="sampleApp">
+<html>
 <head>
   <meta charset="utf-8">
   <title>nodeFire with Authentication</title>
   <!-- AngularJS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
   <script src="../vendors/angular-route.min.js" charset="utf-8"></script>
 
   <!-- Firebase -->
@@ -18,9 +18,13 @@
 
   <!-- Angular Application with Authentication -->
   <script src="../scripts/client.js"></script>
+  <script src="../scripts/controllers/home.controller.js" charset="utf-8"></script>
+  <script src="../scripts/controllers/nonprofits.controller.js" charset="utf-8"></script>
+  <script src="../scripts/controllers/volunteers.controller.js" charset="utf-8"></script>
+  <script src="../scripts/controllers/volunteer-profile.controller.js" charset="utf-8"></script>
   <link rel="stylesheet" href="../vendors/bootstrap.min.css">
 </head>
-<body ng-controller="ConnectApp">
+<body ng-app="ConnectApp">
   <!-- <button ng-click="sc.logIn()">Log In</button>
   <button ng-click="sc.logOut()">Log Out</button> -->
   <nav>
@@ -32,4 +36,5 @@
   </nav>
   <main ng-view></main>
 </body>
+
 </html>
