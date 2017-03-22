@@ -1,3 +1,4 @@
+<button ng-click="vp.logOut()" type="button" name="button" class="btn btn-warning">Logout</button>
 <h3>Volunteer Profile</h3>
 <label for="volunteerName">Full Name: </label>
 <input type="text" name="volunteerName">
@@ -8,16 +9,15 @@
 <h5>About Me</h5>
 <textarea rows="4" cols="50"></textarea>
 <h5>Skills</h5>
-<select ng-model="skills" ng-options=" for x in names"></select>
-<select ng-model="skills" ng-options="x for x in names"></select>
-<select ng-model="skills" ng-options="x for x in names"></select>
+<select ng-model="skills" ng-options="item as item for item in vp.skills.list"></select>
+<select ng-model="skills" ng-options="item as item for item in vp.skills.list"></select>
+<select ng-model="skills" ng-options="item as item for item in vp.skills.list"></select>
 <button ng-click"" type="button" name="button">Add a skill</button>
 <h5>Schedule Availability</h5>
 <h5>Preferred Causes</h5>
-<select ng-model="causes" ng-options="x for x in names"></select>
-<select ng-model="causes" ng-options="x for x in names"></select>
-<select ng-model="causes" ng-options="x for x in names"></select>
-<button ng-click"" type="button" name="button">Add a cause</button>
-<button ng-click="vp.logOut()" type="button" name="button" class="btn btn-warning">Logout</button>
-<button ng-click="" type="button" name="button" class="btn btn-primary">Save</button>
+<select ng-model="causes" ng-options="item as item for item in vp.causes.list"></select>
+<select ng-model="causes" ng-options="item as item for item in vp.causes.list"></select>
+<select ng-model="causes" ng-options="item as item for item in vp.causes.list"></select>
+<button ng-click"" type="button" name="button">Add a cause</button><br>
+<button ng-click="" type="button" name="button" class="btn btn-primary">Save</button><br>
 <button ng-click="" type="button" name="button" class="btn btn-danger">Delete Profile</button>

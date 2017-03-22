@@ -1,13 +1,8 @@
-app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$location', function($firebaseAuth, $http, $location){
+app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$location', 'DataFactory', function($firebaseAuth, $http, $location, DataFactory){
   var self = this;
   var auth = $firebaseAuth();
 
-
-
-
-
-
-
+  // self.skills = DataFactory.skills; // for skills list request from db
 
 
   // auth.$onAuthStateChanged(function(firebaseUser){
