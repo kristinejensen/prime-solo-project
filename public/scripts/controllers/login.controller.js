@@ -25,6 +25,7 @@ app.controller('LoginController', ['$firebaseAuth','$http', '$location', functio
 
 
   // auth.$onAuthStateChanged(function(firebaseUser){
+  //   var firebaseUser = auth.$getAuth();
   //   if(firebaseUser) {
   //   } else {
   //     console.log('Not logged in or not authorized.');
@@ -42,7 +43,7 @@ app.controller('LoginController', ['$firebaseAuth','$http', '$location', functio
   //     self.volunteerProfile = response.data;
   //   });
   // });
-
-
+  //
+  //
 
 }]);

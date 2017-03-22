@@ -1,13 +1,13 @@
 <button ng-click="vp.logOut()" type="button" name="button" class="btn btn-warning">Logout</button>
 <h3>Volunteer Profile</h3>
 <label for="volunteerName">Full Name: </label>
-<input type="text" name="volunteerName">
+<input ng-model="vp.volunteerProfile[0].name" type="text" name="volunteerName">
 <label for="emailAddress">Email Address: </label>
-<input type="text" name="emailAddress">
+<input ng-model="vp.volunteerProfile[0].email"type="text" name="emailAddress">
 <label for="linkedIn">LinkedIn Profile: </label>
-<input type="text" name="linkedIn">
+<input ng-model="vp.volunteerProfile[0].linkedin" type="text" name="linkedIn">
 <h5>About Me</h5>
-<textarea rows="4" cols="50"></textarea>
+<textarea ng-model="vp.volunteerProfile[0].bio" rows="4" cols="50"></textarea>
 <h5>Skills</h5>
 <select ng-model="skills" ng-options="item as item for item in vp.skills.list"></select>
 <select ng-model="skills" ng-options="item as item for item in vp.skills.list"></select>

@@ -2,15 +2,27 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   var self = this;
   var auth = $firebaseAuth();
 
-  // self.skills = DataFactory.skills; // for skills list request from db
+  getVolunteer();
 
-
-  // auth.$onAuthStateChanged(function(firebaseUser){
-  //   if(firebaseUser) {
-  //   } else {
-  //     console.log('Not logged in or not authorized.');
-  //   }
-  // });
+  function getVolunteer(){
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser) {
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'GET',
+          url: '/data/volunteer',
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          self.volunteerProfile = response.data;
+          console.log(self.volunteerProfile);
+        })
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+  };
 
 
 // function that logs user out on button click
