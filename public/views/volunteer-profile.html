@@ -9,15 +9,30 @@
 <h5>About Me</h5>
 <textarea ng-model="vp.volunteerProfile[0].bio" rows="4" cols="50"></textarea>
 <h5>Skills</h5>
-<select ng-model="skills" ng-options="item as item for item in vp.skills.list"></select>
-<select ng-model="skills" ng-options="item as item for item in vp.skills.list"></select>
-<select ng-model="skills" ng-options="item as item for item in vp.skills.list"></select>
+<select ng-model="skillOne" ng-options="item as item.skill for item in vp.skills.list"></select>
+<select ng-model="skillTwo" ng-options="item as item.skill for item in vp.skills.list"></select>
+<select ng-model="skillThree" ng-options="item as item.skill for item in vp.skills.list"></select>
 <button ng-click"" type="button" name="button">Add a skill</button>
 <h5>Schedule Availability</h5>
+<label for="morning">Morning</label>
+<input type="checkbox" name="morning" ng-model="vp.availabilityData.morning">
+<label for="afternoon">Afternoon</label>
+<input type="checkbox" name="afternoon" ng-model="vp.availabilityData.afternoon">
+<label for="evening">Evening</label>
+<input type="checkbox" name="evening" ng-model="vp.availabilityData.evening"><br>
+<label for="weekdays">Weekdays</label>
+<input type="checkbox" name="weekedays" ng-model="vp.availabilityData.weekdays">
+<label for="weekends">Weekends</label>
+<input type="checkbox" name="weekends" ng-model="vp.availabilityData.weekends">
+<label for="open">Open Availability</label>
+<input type="checkbox" name="open" ng-model="vp.availabilityData.open">
+<div>
+  {{vp.availabilityData}}
+</div>
 <h5>Preferred Causes</h5>
-<select ng-model="causes" ng-options="item as item for item in vp.causes.list"></select>
-<select ng-model="causes" ng-options="item as item for item in vp.causes.list"></select>
-<select ng-model="causes" ng-options="item as item for item in vp.causes.list"></select>
+<select ng-model="causeOne" ng-options="item as item.cause for item in vp.causes.list"></select>
+<select ng-model="causeTwo" ng-options="item as item.cause for item in vp.causes.list"></select>
+<select ng-model="causeThree" ng-options="item as item.cause for item in vp.causes.list"></select>
 <button ng-click"" type="button" name="button">Add a cause</button><br>
 <button ng-click="" type="button" name="button" class="btn btn-primary">Save</button><br>
 <button ng-click="" type="button" name="button" class="btn btn-danger">Delete Profile</button>

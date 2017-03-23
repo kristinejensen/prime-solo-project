@@ -2,6 +2,8 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   var self = this;
   var auth = $firebaseAuth();
 
+  self.availabilityData = {};
+
   getVolunteer();
 
   function getVolunteer(){
@@ -16,7 +18,6 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           self.volunteerProfile = response.data;
-          console.log(self.volunteerProfile);
         })
       })
     } else {
@@ -24,8 +25,11 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     }
   };
 
+  self.skills = DataFactory.skills;
 
-// function that logs user out on button click
+  self.causes = DataFactory.causes;
+
+  // function that logs user out on button click
   self.logOut = function(){
     auth.$signOut().then(function(){
       console.log('Logging the user out!');
@@ -33,7 +37,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     });
   };
 
-// function to redirect user to home page after logout
+  // function to redirect user to home page after logout
   self.redirectHome = function(){
     $location.url('/home');
   }
