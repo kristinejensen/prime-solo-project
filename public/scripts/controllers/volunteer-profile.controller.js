@@ -2,7 +2,18 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   var self = this;
   var auth = $firebaseAuth();
 
+  self.volunteerProfile = {};
+  console.log(self.volunteerProfile);
+
   self.availabilityData = {};
+
+  // volunteerObject = {
+  //   name:
+  //   email:
+  //   linkedin:
+  //   bio:
+  //
+  // };
 
   getVolunteer();
 
@@ -26,8 +37,15 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   };
 
   self.skills = DataFactory.skills;
-
   self.causes = DataFactory.causes;
+
+  self.saveProfile = function(volunteerId){
+
+  }
+
+  self.deleteProfile = function(volunteerId){
+
+  }
 
   // function that logs user out on button click
   self.logOut = function(){

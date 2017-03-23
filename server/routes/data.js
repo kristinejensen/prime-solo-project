@@ -14,7 +14,8 @@ router.get('/volunteer', function (req, res){
         console.log('Error completing query', err);
         res.sendStatus(500);
       }else{
-        res.send(result.rows);
+        //if result.rows.length == 0; set up new user
+        res.send(result.rows[0]);
       }
     });
   });
