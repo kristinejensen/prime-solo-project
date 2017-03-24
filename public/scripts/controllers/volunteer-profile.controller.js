@@ -7,6 +7,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
 
   getVolunteer();
 
+  //populates volunteer profile information
   function getVolunteer(){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser) {
@@ -29,9 +30,12 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.skills = DataFactory.skills;
   self.causes = DataFactory.causes;
 
+
+//function to delete "about me" section before updating
   self.saveAboutMe = function(volunteerId){
+    console.log(volunteerId);
     var firebaseUser = auth.$getAuth();
-    if(firebaseUser) {
+    if(firebaseUser){
       firebaseUser.getToken().then(function(idToken){
         $http({
           method: 'DELETE',
@@ -40,7 +44,24 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
             id_token: idToken
           }
         }).then(function(response){
-          console.log('delete successful');
+          console.log('delete about me successful');
+        })
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+    getVolunteer();
+    if(firebaseUser){
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'PUT',
+          url: '/data/volunteer/aboutMe/' + volunteerId,
+          data: self.volunteerProfile,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          console.log('insert about me successful');
         })
       })
     } else {

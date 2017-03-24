@@ -4,6 +4,7 @@ var pg = require('pg');
 var connectionString = require('../modules/database-config');
 
 
+//populates volunteer profile with existing user data || adds a new user to the db
 router.get('/volunteer', function(req, res){
   console.log('getting volunteer');
   var userEmail = req.decodedToken.email;
@@ -12,24 +13,30 @@ router.get('/volunteer', function(req, res){
       done();
       if(err){
         console.log('Error completing query', err);
-      // }else if(result.rows.length == 0){
-      //   pg.connect(connectionString, function(err, client, done){
-      //     client.query('INSERT INTO volunteers (email) VALUES $1', [userEmail], function(err, result){
-      //       done();
-      //       res.send(result.rows[0]);
-      //     });
-      //   });
+        res.sendStatus(500);
+      }else if(result.rows.length == 0){
+        pg.connect(connectionString, function(err, client, done){
+          client.query('INSERT INTO volunteers (email) VALUES ($1)', [userEmail], function(err, result){
+            done();
+            if(err){
+              console.log('Error inserting new volunteer user', err);
+              res.sendStatus(500);
+            }else{
+              res.send({email: userEmail});
+            }
+          });
+        });
       }else{
         res.send(result.rows[0]);
-      } // end of if statement
-    }); //end of client.query1
-  }); //end of pg.connect 1
-}); //end of router.get
+      }
+    });
+  });
+});
 
-
+//populates skills list on the volunteer profile page
 router.get('/skillList', function (req, res){
   pg.connect(connectionString, function(err, client, done){
-    client.query('SELECT * from skills', function(err, result){
+    client.query('SELECT * FROM skills', function(err, result){
       done();
       if(err){
         console.log('Error completing query', err);
@@ -42,12 +49,13 @@ router.get('/skillList', function (req, res){
   });
 });
 
+//populates causes list on the volunteer profile page
 router.get('/causeList', function (req, res){
   pg.connect(connectionString, function(err, client, done){
-    client.query('SELECT * from causes', function(err, result){
+    client.query('SELECT * FROM causes', function(err, result){
       done();
       if(err){
-        console.log('Error completing query', err);
+        console.log('Error completing cause list query', err);
         res.sendStatus(500);
       }else{
         res.send(result.rows);
@@ -59,8 +67,45 @@ router.get('/causeList', function (req, res){
 
 router.delete('/volunteer/aboutMe/:id', function(req, res){
   var volunteerId = req.params.id;
-  console.log('Deleting about me for volunteer id: ', volunteerId);
+  pg.connect(connectionString, function(err, client, done){
+    client.query('DELETE FROM volunteers WHERE id=$1',[volunteerId], function(err, result){
+      done();
+      if(err){
+        console.log('Error completing delete about me query', err);
+        res.sendStatus(500);
+      }else{
+        res.sendStatus(200);
+      }
+    });
+  });
 });
+
+router.put('/volunteer/aboutMe/:id', function(req, res){
+  log('hit my about me put route')
+  // var volunteerId = req.params.id;
+  // var volunteerObject = req.body
+  // console.log(req.body);
+  // pg.connect(connectionString, function(err, client, done){
+  //   client.query('DELETE FROM volunteers WHERE id=$1',[volunteerId], function(err, result){
+  //     done();
+  //     if(err){
+  //       console.log('Error completing delete about me query', err);
+  //       res.sendStatus(500);
+  //     }else{
+  //       res.sendStatus(200);
+  //     }
+  //   });
+  // });
+});
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;
