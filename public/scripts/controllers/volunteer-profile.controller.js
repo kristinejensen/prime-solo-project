@@ -3,17 +3,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   var auth = $firebaseAuth();
 
   self.volunteerProfile = {};
-  console.log(self.volunteerProfile);
-
   self.availabilityData = {};
-
-  // volunteerObject = {
-  //   name:
-  //   email:
-  //   linkedin:
-  //   bio:
-  //
-  // };
 
   getVolunteer();
 
@@ -39,13 +29,28 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.skills = DataFactory.skills;
   self.causes = DataFactory.causes;
 
-  self.saveProfile = function(volunteerId){
+  self.saveAboutMe = function(volunteerId){
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser) {
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'DELETE',
+          url: '/data/volunteer/aboutMe/' + volunteerId,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          console.log('delete successful');
+        })
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+  };
 
-  }
-
-  self.deleteProfile = function(volunteerId){
-
-  }
+  // self.deleteProfile = function(volunteerId){
+  //
+  // }
 
   // function that logs user out on button click
   self.logOut = function(){
