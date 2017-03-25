@@ -31,9 +31,8 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.causes = DataFactory.causes;
 
 
-//function to delete "about me" section before updating
-  self.saveAboutMe = function(volunteerId){
-    console.log(volunteerId);
+  //function to delete "about me" section before updating
+  self.clearAboutMe = function(volunteerId){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser){
       firebaseUser.getToken().then(function(idToken){
@@ -51,6 +50,11 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
       console.log('Not logged in or not authorized.');
     }
     getVolunteer();
+  };
+
+//function to update "about me" section
+  self.updateAboutMe = function(volunteerId){
+    var firebaseUser = auth.$getAuth();
     if(firebaseUser){
       firebaseUser.getToken().then(function(idToken){
         $http({
@@ -67,23 +71,24 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     } else {
       console.log('Not logged in or not authorized.');
     }
+    getVolunteer();
   };
 
-  // self.deleteProfile = function(volunteerId){
-  //
-  // }
+    // self.deleteProfile = function(volunteerId){
+    //
+    // }
 
-  // function that logs user out on button click
-  self.logOut = function(){
-    auth.$signOut().then(function(){
-      console.log('Logging the user out!');
-      self.redirectHome();
-    });
-  };
+    // function that logs user out on button click
+    self.logOut = function(){
+      auth.$signOut().then(function(){
+        console.log('Logging the user out!');
+        self.redirectHome();
+      });
+    };
 
-  // function to redirect user to home page after logout
-  self.redirectHome = function(){
-    $location.url('/home');
-  }
+    // function to redirect user to home page after logout
+    self.redirectHome = function(){
+      $location.url('/home');
+    }
 
-}]);
+  }]);

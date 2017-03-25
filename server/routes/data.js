@@ -65,6 +65,7 @@ router.get('/causeList', function (req, res){
   });
 });
 
+//clears "about me" section to prep for update
 router.delete('/volunteer/aboutMe/:id', function(req, res){
   var volunteerId = req.params.id;
   pg.connect(connectionString, function(err, client, done){
@@ -80,11 +81,12 @@ router.delete('/volunteer/aboutMe/:id', function(req, res){
   });
 });
 
+//updates "about me" section
 router.put('/volunteer/aboutMe/:id', function(req, res){
-  log('hit my about me put route')
-  // var volunteerId = req.params.id;
-  // var volunteerObject = req.body
-  // console.log(req.body);
+  console.log('hit my about me put route')
+  var volunteerId = req.params.id;
+  var volunteerObject = req.body
+  console.log(req.body);
   // pg.connect(connectionString, function(err, client, done){
   //   client.query('DELETE FROM volunteers WHERE id=$1',[volunteerId], function(err, result){
   //     done();
