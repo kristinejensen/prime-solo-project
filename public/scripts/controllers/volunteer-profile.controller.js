@@ -74,6 +74,29 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     getVolunteer();
   };
 
+  //function to update skills section
+    self.updateSkills = function(volunteerId){
+      console.log('update skills button clicked');
+      var firebaseUser = auth.$getAuth();
+      if(firebaseUser){
+        firebaseUser.getToken().then(function(idToken){
+          $http({
+            method: 'PUT',
+            url: '/data/volunteer/skills/' + volunteerId,
+            data: self.volunteerProfile,
+            headers: {
+              id_token: idToken
+            }
+          }).then(function(response){
+            console.log('insert skills successful');
+          })
+        })
+      } else {
+        console.log('Not logged in or not authorized.');
+      }
+      getVolunteer();
+    };
+
     // self.deleteProfile = function(volunteerId){
     //
     // }

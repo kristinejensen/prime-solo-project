@@ -43,7 +43,6 @@ router.get('/skillList', function (req, res){
         res.sendStatus(500);
       }else{
         res.send(result.rows);
-        console.log(result.rows);
       }
     });
   });
@@ -59,7 +58,6 @@ router.get('/causeList', function (req, res){
         res.sendStatus(500);
       }else{
         res.send(result.rows);
-        console.log(result.rows);
       }
     });
   });
@@ -100,7 +98,23 @@ router.put('/volunteer/aboutMe/:id', function(req, res){
 });
 
 
-
+//updates skills section
+router.put('/volunteer/skills/:id', function(req, res){
+  var volunteerId = req.params.id;
+  var volunteerObject = req.body;
+  pg.connect(connectionString, function(err, client, done){
+    client.query('INSERT INTO skills (skill, volunteer_id) VALUES ($1, $2)',
+    [volunteerObject.skillOne.skill, volunteerId], function(err, result){
+      done();
+      if(err){
+        console.log('Error inserting skill one query', err);
+        res.sendStatus(500);
+      }else{
+        res.send(result.rows[0])
+      }
+    });
+  });
+});
 
 
 
