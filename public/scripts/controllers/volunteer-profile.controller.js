@@ -31,7 +31,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.causes = DataFactory.causes;
 
 
-  //function to delete "about me" section before updating
+  //function to clear "about me" section before updating
   self.clearAboutMe = function(volunteerId){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser){
@@ -52,7 +52,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     getVolunteer();
   };
 
-//function to update "about me" section
+  //function to update "about me" section
   self.updateAboutMe = function(volunteerId){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser){
@@ -74,44 +74,84 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     getVolunteer();
   };
 
-  //function to update skills section
-    self.updateSkills = function(volunteerId){
-      console.log('update skills button clicked');
-      var firebaseUser = auth.$getAuth();
-      if(firebaseUser){
-        firebaseUser.getToken().then(function(idToken){
-          $http({
-            method: 'PUT',
-            url: '/data/volunteer/skills/' + volunteerId,
-            data: self.volunteerProfile,
-            headers: {
-              id_token: idToken
-            }
-          }).then(function(response){
-            console.log('insert skills successful');
-          })
+  //function to clear skills section before updating
+  self.clearSkills = function(volunteerId){
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'DELETE',
+          url: '/data/volunteer/skills/' + volunteerId,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          console.log('delete skills successful');
         })
-      } else {
-        console.log('Not logged in or not authorized.');
-      }
-      getVolunteer();
-    };
-
-    // self.deleteProfile = function(volunteerId){
-    //
-    // }
-
-    // function that logs user out on button click
-    self.logOut = function(){
-      auth.$signOut().then(function(){
-        console.log('Logging the user out!');
-        self.redirectHome();
-      });
-    };
-
-    // function to redirect user to home page after logout
-    self.redirectHome = function(){
-      $location.url('/home');
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
     }
+  };
 
-  }]);
+  // //function to update skills section
+  //   self.updateSkills = function(volunteerId){
+  //     console.log('update skills button clicked');
+  //     var firebaseUser = auth.$getAuth();
+  //     if(firebaseUser){
+  //       firebaseUser.getToken().then(function(idToken){
+  //         $http({
+  //           method: 'PUT',
+  //           url: '/data/volunteer/skills/' + volunteerId,
+  //           data: self.volunteerProfile,
+  //           headers: {
+  //             id_token: idToken
+  //           }
+  //         }).then(function(response){
+  //           console.log('insert skills successful');
+  //         })
+  //       })
+  //     } else {
+  //       console.log('Not logged in or not authorized.');
+  //     }
+  //     getVolunteer();
+  //   };
+
+  // self.deleteProfile = function(volunteerId){
+  //
+  // }
+
+  //function to clear causes section before updating
+  self.clearCauses = function(volunteerId){
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'DELETE',
+          url: '/data/volunteer/causes/' + volunteerId,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          console.log('delete causes successful');
+        })
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+  };
+
+  // function that logs user out on button click
+  self.logOut = function(){
+    auth.$signOut().then(function(){
+      console.log('Logging the user out!');
+      self.redirectHome();
+    });
+  };
+
+  // function to redirect user to home page after logout
+  self.redirectHome = function(){
+    $location.url('/home');
+  }
+
+}]);

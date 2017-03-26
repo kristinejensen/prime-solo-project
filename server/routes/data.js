@@ -97,26 +97,81 @@ router.put('/volunteer/aboutMe/:id', function(req, res){
   });
 });
 
-
-//updates skills section
-router.put('/volunteer/skills/:id', function(req, res){
+//clears skills section to prep for update
+router.delete('/volunteer/skills/:id', function(req, res){
   var volunteerId = req.params.id;
-  var volunteerObject = req.body;
   pg.connect(connectionString, function(err, client, done){
-    client.query('INSERT INTO skills (skill, volunteer_id) VALUES ($1, $2)',
-    [volunteerObject.skillOne.skill, volunteerId], function(err, result){
+    client.query('DELETE FROM skills WHERE volunteer_id=$1',[volunteerId], function(err, result){
       done();
       if(err){
-        console.log('Error inserting skill one query', err);
+        console.log('Error completing delete skills query', err);
         res.sendStatus(500);
       }else{
-        res.send(result.rows[0])
+        console.log('Success completing delete skills query');
+        res.sendStatus(200);
       }
     });
   });
 });
 
+// //updates skills section
+// router.put('/volunteer/skills/:id', function(req, res){
+//   var volunteerId = req.params.id;
+//   var volunteerObject = req.body;
+//   pg.connect(connectionString, function(err, client, done){
+//     client.query('INSERT INTO skills (skill, volunteer_id) VALUES ($1, $2)',
+//     [volunteerObject.skillOne.skill, volunteerId], function(err, result){
+//       done();
+//       if(err){
+//         console.log('Error inserting skill one query', err);
+//         res.sendStatus(500);
+//       }else{
+//         res.sendStatus(200);
+//       }
+//     });
+//   });
+//   pg.connect(connectionString, function(err, client, done){
+//     client.query('INSERT INTO skills (skill, volunteer_id) VALUES ($1, $2)',
+//     [volunteerObject.skillTwo.skill, volunteerId], function(err, result){
+//       done();
+//       if(err){
+//         console.log('Error inserting skill one query', err);
+//         res.sendStatus(500);
+//       }else{
+//         res.sendStatus(200);
+//       }
+//     });
+//   });
+//   pg.connect(connectionString, function(err, client, done){
+//     client.query('INSERT INTO skills (skill, volunteer_id) VALUES ($1, $2)',
+//     [volunteerObject.skillThree.skill, volunteerId], function(err, result){
+//       done();
+//       if(err){
+//         console.log('Error inserting skill one query', err);
+//         res.sendStatus(500);
+//       }else{
+//         res.sendStatus(200);
+//       }
+//     });
+//   });
+// });
 
+//clears causes section to prep for update
+router.delete('/volunteer/causes/:id', function(req, res){
+  var volunteerId = req.params.id;
+  pg.connect(connectionString, function(err, client, done){
+    client.query('DELETE FROM causes WHERE volunteer_id=$1',[volunteerId], function(err, result){
+      done();
+      if(err){
+        console.log('Error completing delete causes query', err);
+        res.sendStatus(500);
+      }else{
+        console.log('Success completing delete causes query');
+        res.sendStatus(200);
+      }
+    });
+  });
+});
 
 
 
