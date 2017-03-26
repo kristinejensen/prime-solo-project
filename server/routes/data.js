@@ -83,21 +83,20 @@ router.delete('/volunteer/aboutMe/:id', function(req, res){
 
 //updates "about me" section
 router.put('/volunteer/aboutMe/:id', function(req, res){
-  console.log('hit my about me put route')
   var volunteerId = req.params.id;
-  var volunteerObject = req.body
-  console.log(req.body);
-  // pg.connect(connectionString, function(err, client, done){
-  //   client.query('DELETE FROM volunteers WHERE id=$1',[volunteerId], function(err, result){
-  //     done();
-  //     if(err){
-  //       console.log('Error completing delete about me query', err);
-  //       res.sendStatus(500);
-  //     }else{
-  //       res.sendStatus(200);
-  //     }
-  //   });
-  // });
+  var volunteerObject = req.body;
+  pg.connect(connectionString, function(err, client, done){
+    client.query('INSERT INTO volunteers (name, email, linkedin, bio) VALUES ($1, $2, $3, $4)',
+    [volunteerObject.name, volunteerObject.email, volunteerObject.linkedin, volunteerObject.bio], function(err, result){
+      done();
+      if(err){
+        console.log('Error completing update about me query', err);
+        res.sendStatus(500);
+      }else{
+        res.sendStatus(200);
+      }
+    });
+  });
 });
 
 
