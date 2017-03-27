@@ -73,25 +73,6 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     getVolunteer();
   };
 
-  // function to clear skills section before updating
-  self.clearSkills = function(volunteerId){
-    var firebaseUser = auth.$getAuth();
-    if(firebaseUser){
-      firebaseUser.getToken().then(function(idToken){
-        $http({
-          method: 'DELETE',
-          url: '/data/volunteer/skills/' + volunteerId,
-          headers: {
-            id_token: idToken
-          }
-        }).then(function(response){
-          console.log('delete skills successful');
-        })
-      })
-    } else {
-      console.log('Not logged in or not authorized.');
-    }
-  };
 
   // function to update skills section
     self.updateSkills = function(volunteerId){
@@ -158,26 +139,6 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
       }
       getVolunteer();
     };
-
-  //function to clear causes section before updating
-  self.clearCauses = function(volunteerId){
-    var firebaseUser = auth.$getAuth();
-    if(firebaseUser){
-      firebaseUser.getToken().then(function(idToken){
-        $http({
-          method: 'DELETE',
-          url: '/data/volunteer/causes/' + volunteerId,
-          headers: {
-            id_token: idToken
-          }
-        }).then(function(response){
-          console.log('delete causes successful');
-        })
-      })
-    } else {
-      console.log('Not logged in or not authorized.');
-    }
-  };
 
   // function to update causes section
     self.updateCauses = function(volunteerId){
