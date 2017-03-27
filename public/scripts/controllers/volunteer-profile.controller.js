@@ -117,9 +117,28 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   //     getVolunteer();
   //   };
 
-  // self.deleteProfile = function(volunteerId){
-  //
-  // }
+  //function to update availability section
+    self.updateAvailability = function(volunteerId){
+      console.log('update availability button clicked');
+      var firebaseUser = auth.$getAuth();
+      if(firebaseUser){
+        firebaseUser.getToken().then(function(idToken){
+          $http({
+            method: 'PUT',
+            url: '/data/volunteer/availability/' + volunteerId,
+            data: self.availabilityData,
+            headers: {
+              id_token: idToken
+            }
+          }).then(function(response){
+            console.log('insert availability successful');
+          })
+        })
+      } else {
+        console.log('Not logged in or not authorized.');
+      }
+      getVolunteer();
+    };
 
   //function to clear causes section before updating
   self.clearCauses = function(volunteerId){
@@ -140,6 +159,10 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
       console.log('Not logged in or not authorized.');
     }
   };
+
+  // self.deleteProfile = function(volunteerId){
+  //
+  // }
 
   // function that logs user out on button click
   self.logOut = function(){

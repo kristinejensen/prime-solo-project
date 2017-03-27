@@ -156,6 +156,25 @@ router.delete('/volunteer/skills/:id', function(req, res){
 //   });
 // });
 
+
+//updates availability section
+router.put('/volunteer/availability/:id', function(req, res){
+  var volunteerId = req.params.id;
+  var availabilityObject = req.body;
+  pg.connect(connectionString, function(err, client, done){
+    client.query('INSERT INTO availability (morning, afternoon, evening, weekdays, weekends, open, volunteer_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+    [availabilityObject.morning, availabilityObject.afternoon, availabilityObject.evening, availabilityObject.weekdays, availabilityObject.weekends, availabilityObject.open, volunteerId], function(err, result){
+      done();
+      if(err){
+        console.log('Error inserting availability query', err);
+        res.sendStatus(500);
+      }else{
+        res.sendStatus(200);
+      }
+    });
+  });
+});
+
 //clears causes section to prep for update
 router.delete('/volunteer/causes/:id', function(req, res){
   var volunteerId = req.params.id;
@@ -172,10 +191,5 @@ router.delete('/volunteer/causes/:id', function(req, res){
     });
   });
 });
-
-
-
-
-
 
 module.exports = router;
