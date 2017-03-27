@@ -21,20 +21,29 @@ router.get('/volunteer', function (req, res) {
               console.log('Error inserting new volunteer user', err);
               res.sendStatus(500);
             } else {
-              client.query('INSERT INTO volunteer_skills (volunteer_id, skill_id) VALUES ($1, $2), ($1, $2), ($1, $2);', [result.rows[0].id, 47],
-                function (err, result) {
-                  if (err) {
-                    console.log('Error inserting new volunteer user', err);
-                    res.sendStatus(500);
-                  } else {
-                    res.send({ email: userEmail });
-                  }
-                });
+              client.query('INSERT INTO volunteer_skills (volunteer_id, skill_id) VALUES ($1, $2), ($1, $2), ($1, $2) RETURNING volunteer_id;', [result.rows[0].id, 47],
+              function (err, result) {
+                if (err) {
+                  console.log('Error adding default skills', err);
+                  res.sendStatus(500);
+                } else {
+                  client.query('INSERT INTO volunteer_causes (volunteer_id, cause_id) VALUES ($1, $2), ($1, $2), ($1, $2) RETURNING volunteer_id;', [result.rows[0].volunteer_id, 23],
+                  function(err, result){
+                    if (err){
+                      console.log('Error adding default causes', err);
+                      res.sendStatus(500);
+                    } else {
+                      res.send({email: userEmail});
+                    }
+                  });
+                }
+              });
             }
           });
         });
       } else {
         res.send(result.rows[0]);
+        console.log(result.rows[0]);
       }
     });
   });
@@ -62,15 +71,15 @@ router.put('/volunteer/aboutMe/:id', function (req, res) {
   var volunteerObject = req.body;
   pg.connect(connectionString, function (err, client, done) {
     client.query('INSERT INTO volunteers (name, email, linkedin, bio) VALUES ($1, $2, $3, $4)',
-      [volunteerObject.name, volunteerObject.email, volunteerObject.linkedin, volunteerObject.bio], function (err, result) {
-        done();
-        if (err) {
-          console.log('Error completing update about me query', err);
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(200);
-        }
-      });
+    [volunteerObject.name, volunteerObject.email, volunteerObject.linkedin, volunteerObject.bio], function (err, result) {
+      done();
+      if (err) {
+        console.log('Error completing update about me query', err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
+      }
+    });
   });
 });
 
@@ -97,15 +106,15 @@ router.put('/volunteer/skills/:id', function (req, res) {
   var volunteerObject = req.body;
   pg.connect(connectionString, function (err, client, done) {
     client.query('INSERT INTO volunteer_skills (volunteer_id, skill_id) VALUES ($1, $2), ($3, $4), ($5, $6)',
-      [volunteerId, volunteerObject.skillOne.id, volunteerId, volunteerObject.skillTwo.id, volunteerId, volunteerObject.skillThree.id], function (err, result) {
-        done();
-        if (err) {
-          console.log('Error inserting skill query', err);
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(200);
-        }
-      });
+    [volunteerId, volunteerObject.skillOne.id, volunteerId, volunteerObject.skillTwo.id, volunteerId, volunteerObject.skillThree.id], function (err, result) {
+      done();
+      if (err) {
+        console.log('Error inserting skill query', err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
+      }
+    });
   });
 });
 
@@ -133,15 +142,15 @@ router.put('/volunteer/availability/:id', function (req, res) {
   var availabilityObject = req.body;
   pg.connect(connectionString, function (err, client, done) {
     client.query('INSERT INTO availability (morning, afternoon, evening, weekdays, weekends, open, volunteer_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-      [availabilityObject.morning, availabilityObject.afternoon, availabilityObject.evening, availabilityObject.weekdays, availabilityObject.weekends, availabilityObject.open, volunteerId], function (err, result) {
-        done();
-        if (err) {
-          console.log('Error inserting availability query', err);
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(200);
-        }
-      });
+    [availabilityObject.morning, availabilityObject.afternoon, availabilityObject.evening, availabilityObject.weekdays, availabilityObject.weekends, availabilityObject.open, volunteerId], function (err, result) {
+      done();
+      if (err) {
+        console.log('Error inserting availability query', err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
+      }
+    });
   });
 });
 
@@ -168,15 +177,15 @@ router.put('/volunteer/causes/:id', function (req, res) {
   var volunteerObject = req.body;
   pg.connect(connectionString, function (err, client, done) {
     client.query('INSERT INTO volunteer_causes (volunteer_id, cause_id) VALUES ($1, $2), ($3, $4), ($5, $6)',
-      [volunteerId, volunteerObject.causeOne.id, volunteerId, volunteerObject.causeTwo.id, volunteerId, volunteerObject.causeThree.id], function (err, result) {
-        done();
-        if (err) {
-          console.log('Error inserting causes query', err);
-          res.sendStatus(500);
-        } else {
-          res.sendStatus(200);
-        }
-      });
+    [volunteerId, volunteerObject.causeOne.id, volunteerId, volunteerObject.causeTwo.id, volunteerId, volunteerObject.causeThree.id], function (err, result) {
+      done();
+      if (err) {
+        console.log('Error inserting causes query', err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(200);
+      }
+    });
   });
 });
 

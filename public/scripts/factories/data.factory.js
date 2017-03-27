@@ -4,8 +4,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
   var causes = {list: []};
 auth.$onAuthStateChanged(skillList);
 auth.$onAuthStateChanged(causeList);
-  // skillList();
-  // causeList();
 
 //function to populate skills list
   function skillList(){
