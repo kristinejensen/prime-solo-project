@@ -2,10 +2,12 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
   var auth = $firebaseAuth();
   var skills = {list: []};
   var causes = {list: []};
+auth.$onAuthStateChanged(skillList);
+auth.$onAuthStateChanged(causeList);
+  // skillList();
+  // causeList();
 
-  skillList();
-  causeList();
-
+//function to populate skills list
   function skillList(){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser) {
@@ -25,6 +27,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     }
   };
 
+//function to populate causes list
   function causeList(){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser) {

@@ -30,7 +30,6 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.skills = DataFactory.skills;
   self.causes = DataFactory.causes;
 
-
   //function to clear "about me" section before updating
   self.clearAboutMe = function(volunteerId){
     var firebaseUser = auth.$getAuth();
@@ -74,7 +73,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     getVolunteer();
   };
 
-  //function to clear skills section before updating
+  // function to clear skills section before updating
   self.clearSkills = function(volunteerId){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser){
@@ -94,28 +93,48 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     }
   };
 
-  // //function to update skills section
-  //   self.updateSkills = function(volunteerId){
-  //     console.log('update skills button clicked');
-  //     var firebaseUser = auth.$getAuth();
-  //     if(firebaseUser){
-  //       firebaseUser.getToken().then(function(idToken){
-  //         $http({
-  //           method: 'PUT',
-  //           url: '/data/volunteer/skills/' + volunteerId,
-  //           data: self.volunteerProfile,
-  //           headers: {
-  //             id_token: idToken
-  //           }
-  //         }).then(function(response){
-  //           console.log('insert skills successful');
-  //         })
-  //       })
-  //     } else {
-  //       console.log('Not logged in or not authorized.');
-  //     }
-  //     getVolunteer();
-  //   };
+  // function to update skills section
+    self.updateSkills = function(volunteerId){
+      console.log('update skills button clicked');
+      var firebaseUser = auth.$getAuth();
+      if(firebaseUser){
+        firebaseUser.getToken().then(function(idToken){
+          $http({
+            method: 'PUT',
+            url: '/data/volunteer/skills/' + volunteerId,
+            data: self.volunteerProfile,
+            headers: {
+              id_token: idToken
+            }
+          }).then(function(response){
+            console.log('insert skills successful');
+          })
+        })
+      } else {
+        console.log('Not logged in or not authorized.');
+      }
+      getVolunteer();
+    };
+
+  //function to clear availability section before updating
+  self.clearAvailability = function(volunteerId){
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'DELETE',
+          url: '/data/volunteer/availability/' + volunteerId,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          console.log('delete availability successful');
+        })
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+  };
 
   //function to update availability section
     self.updateAvailability = function(volunteerId){
@@ -159,6 +178,28 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
       console.log('Not logged in or not authorized.');
     }
   };
+
+  // function to update causes section
+    self.updateCauses = function(volunteerId){
+      var firebaseUser = auth.$getAuth();
+      if(firebaseUser){
+        firebaseUser.getToken().then(function(idToken){
+          $http({
+            method: 'PUT',
+            url: '/data/volunteer/causes/' + volunteerId,
+            data: self.volunteerProfile,
+            headers: {
+              id_token: idToken
+            }
+          }).then(function(response){
+            console.log('insert causes successful');
+          })
+        })
+      } else {
+        console.log('Not logged in or not authorized.');
+      }
+      getVolunteer();
+    };
 
   // self.deleteProfile = function(volunteerId){
   //
