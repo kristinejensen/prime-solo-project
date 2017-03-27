@@ -33,7 +33,15 @@ router.get('/volunteer', function (req, res) {
                       console.log('Error adding default causes', err);
                       res.sendStatus(500);
                     } else {
-                      res.send({email: userEmail});
+                      client.query('INSERT INTO availability (morning, afternoon, evening, weekdays, weekends, open, volunteer_id) VALUES ($1, $2, $3, $4, $5, $6, $7);', [false, false, false, false, false, false, result.rows[0].volunteer_id],
+                      function(err, result){
+                        if(err){
+                          console.log('Error adding default availability', err);
+                          res.sendStatus(500);
+                        } else {
+                          res.send({email: userEmail});
+                        }
+                      });
                     }
                   });
                 }
@@ -83,7 +91,6 @@ router.put('/volunteer/aboutMe/:id', function (req, res) {
   });
 });
 
-
 //updates skills section
 router.put('/volunteer/skills/:id', function (req, res) {
   var volunteerId = req.params.id;
@@ -120,30 +127,30 @@ router.put('/volunteer/skills/:id', function (req, res) {
   })
 });
 
-//clears availability section to prep for update
-router.delete('/volunteer/availability/:id', function (req, res) {
-  console.log('delete availability route hit');
-  var volunteerId = req.params.id;
-  pg.connect(connectionString, function (err, client, done) {
-    client.query('DELETE FROM availability WHERE volunteer_id=$1', [volunteerId], function (err, result) {
-      done();
-      if (err) {
-        console.log('Error completing delete availability query', err);
-        res.sendStatus(500);
-      } else {
-        console.log('Success completing availability causes query');
-        res.sendStatus(200);
-      }
-    });
-  });
-});
+// clears availability section to prep for update
+// router.delete('/volunteer/availability/:id', function (req, res) {
+//   console.log('delete availability route hit');
+//   var volunteerId = req.params.id;
+//   pg.connect(connectionString, function (err, client, done) {
+//     client.query('DELETE FROM availability WHERE volunteer_id=$1', [volunteerId], function (err, result) {
+//       done();
+//       if (err) {
+//         console.log('Error completing delete availability query', err);
+//         res.sendStatus(500);
+//       } else {
+//         console.log('Success completing availability causes query');
+//         res.sendStatus(200);
+//       }
+//     });
+//   });
+// });
 
 // updates availability section
 router.put('/volunteer/availability/:id', function (req, res) {
   var volunteerId = req.params.id;
   var availabilityObject = req.body;
   pg.connect(connectionString, function (err, client, done) {
-    client.query('UPDATE availability (morning, afternoon, evening, weekdays, weekends, open, volunteer_id) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+    client.query('UPDATE availability SET morning=$1, afternoon=$2, evening=$3, weekdays=$4, weekends=$5, open=$6, volunteer_id=$7;',
     [availabilityObject.morning, availabilityObject.afternoon, availabilityObject.evening, availabilityObject.weekdays, availabilityObject.weekends, availabilityObject.open, volunteerId], function (err, result) {
       done();
       if (err) {

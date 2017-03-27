@@ -5,7 +5,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.volunteerProfile = {};
   self.availabilityData = {};
 
-  getVolunteer();
+  auth.$onAuthStateChanged(getVolunteer);
 
   //populates volunteer profile information
   function getVolunteer(){
@@ -98,24 +98,24 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     };
 
   //function to clear availability section before updating
-  self.clearAvailability = function(volunteerId){
-    var firebaseUser = auth.$getAuth();
-    if(firebaseUser){
-      firebaseUser.getToken().then(function(idToken){
-        $http({
-          method: 'DELETE',
-          url: '/data/volunteer/availability/' + volunteerId,
-          headers: {
-            id_token: idToken
-          }
-        }).then(function(response){
-          console.log('delete availability successful');
-        })
-      })
-    } else {
-      console.log('Not logged in or not authorized.');
-    }
-  };
+  // self.clearAvailability = function(volunteerId){
+  //   var firebaseUser = auth.$getAuth();
+  //   if(firebaseUser){
+  //     firebaseUser.getToken().then(function(idToken){
+  //       $http({
+  //         method: 'DELETE',
+  //         url: '/data/volunteer/availability/' + volunteerId,
+  //         headers: {
+  //           id_token: idToken
+  //         }
+  //       }).then(function(response){
+  //         console.log('delete availability successful');
+  //       })
+  //     })
+  //   } else {
+  //     console.log('Not logged in or not authorized.');
+  //   }
+  // };
 
   //function to update availability section
     self.updateAvailability = function(volunteerId){
