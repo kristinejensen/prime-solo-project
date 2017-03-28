@@ -12,7 +12,7 @@ auth.$onAuthStateChanged(causeList);
       firebaseUser.getToken().then(function(idToken){
         $http({
           method: 'GET',
-          url: '/data/skillList',
+          url: '/list_data/skillList',
           headers: {
             id_token: idToken
           }
@@ -32,7 +32,7 @@ auth.$onAuthStateChanged(causeList);
       firebaseUser.getToken().then(function(idToken){
         $http({
           method: 'GET',
-          url: '/data/causeList',
+          url: '/list_data/causeList',
           headers: {
             id_token: idToken
           }

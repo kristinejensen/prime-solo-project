@@ -6,8 +6,9 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.availabilityData = {};
 
   auth.$onAuthStateChanged(getVolunteer);
+  getSkills();
 
-  //populates volunteer profile information
+  //populates volunteer profile information on page load
   function getVolunteer(){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser) {
@@ -26,6 +27,31 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
       console.log('Not logged in or not authorized.');
     }
   };
+
+  //populates volunteer skill information on page load
+  function getSkills(){
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser) {
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'GET',
+          url: '/data/volunteer/skills',
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          self.volunteerProfile = response.data;
+          console.log(self.volunteerProfile[0].skill);
+          console.log(self.volunteerProfile[1].skill);
+          console.log(self.volunteerProfile[2].skill);
+        })
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+  };
+
+
 
   self.skills = DataFactory.skills;
   self.causes = DataFactory.causes;
@@ -75,92 +101,72 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
 
 
   // function to update skills section
-    self.updateSkills = function(volunteerId){
-      console.log('update skills button clicked');
-      var firebaseUser = auth.$getAuth();
-      if(firebaseUser){
-        firebaseUser.getToken().then(function(idToken){
-          $http({
-            method: 'PUT',
-            url: '/data/volunteer/skills/' + volunteerId,
-            data: self.volunteerProfile,
-            headers: {
-              id_token: idToken
-            }
-          }).then(function(response){
-            console.log('insert skills successful');
-          })
+  self.updateSkills = function(volunteerId){
+    console.log('update skills button clicked');
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'PUT',
+          url: '/data/volunteer/skills/' + volunteerId,
+          data: self.volunteerProfile,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          console.log('insert skills successful');
         })
-      } else {
-        console.log('Not logged in or not authorized.');
-      }
-      getVolunteer();
-    };
-
-  //function to clear availability section before updating
-  // self.clearAvailability = function(volunteerId){
-  //   var firebaseUser = auth.$getAuth();
-  //   if(firebaseUser){
-  //     firebaseUser.getToken().then(function(idToken){
-  //       $http({
-  //         method: 'DELETE',
-  //         url: '/data/volunteer/availability/' + volunteerId,
-  //         headers: {
-  //           id_token: idToken
-  //         }
-  //       }).then(function(response){
-  //         console.log('delete availability successful');
-  //       })
-  //     })
-  //   } else {
-  //     console.log('Not logged in or not authorized.');
-  //   }
-  // };
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+    getVolunteer();
+  };
 
   //function to update availability section
-    self.updateAvailability = function(volunteerId){
-      console.log('update availability button clicked');
-      var firebaseUser = auth.$getAuth();
-      if(firebaseUser){
-        firebaseUser.getToken().then(function(idToken){
-          $http({
-            method: 'PUT',
-            url: '/data/volunteer/availability/' + volunteerId,
-            data: self.availabilityData,
-            headers: {
-              id_token: idToken
-            }
-          }).then(function(response){
-            console.log('insert availability successful');
-          })
+  self.updateAvailability = function(volunteerId){
+    console.log('update availability button clicked');
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'PUT',
+          url: '/data/volunteer/availability/' + volunteerId,
+          data: self.availabilityData,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          console.log('insert availability successful');
         })
-      } else {
-        console.log('Not logged in or not authorized.');
-      }
-      getVolunteer();
-    };
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+    getVolunteer();
+  };
 
   // function to update causes section
-    self.updateCauses = function(volunteerId){
-      var firebaseUser = auth.$getAuth();
-      if(firebaseUser){
-        firebaseUser.getToken().then(function(idToken){
-          $http({
-            method: 'PUT',
-            url: '/data/volunteer/causes/' + volunteerId,
-            data: self.volunteerProfile,
-            headers: {
-              id_token: idToken
-            }
-          }).then(function(response){
-            console.log('insert causes successful');
-          })
+  self.updateCauses = function(volunteerId){
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'PUT',
+          url: '/data/volunteer/causes/' + volunteerId,
+          data: self.volunteerProfile,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          console.log('insert causes successful');
         })
-      } else {
-        console.log('Not logged in or not authorized.');
-      }
-      getVolunteer();
-    };
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+    getVolunteer();
+  };
 
   // self.deleteProfile = function(volunteerId){
   //

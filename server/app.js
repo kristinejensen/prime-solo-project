@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var decoder = require('./modules/decoder');
 var login = require('./routes/login');
 var data = require('./routes/data');
+var list_data = require('./routes/list_data');
 var portDecision = process.env.PORT || 5000;
 
 app.get('/', function(req, res){
@@ -19,7 +20,8 @@ app.use(decoder.token);
 /* Whatever you do below this is protected by your authentication. */
 
 app.use('/login', login);
-app.use('/data', data)
+app.use('/data', data);
+app.use('/list_data', list_data);
 
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);

@@ -51,7 +51,24 @@ router.get('/volunteer', function (req, res) {
         });
       } else {
         res.send(result.rows[0]);
-        console.log(result.rows[0]);
+      }
+    });
+  });
+});
+
+//populates volunteer profile with existing user data || adds a new user to the db
+router.get('/volunteer/skills', function(req, res){
+  console.log('get skills route hit');
+  var userEmail = req.decodedToken.email;
+  pg.connect(connectionString, function (err, client, done) {
+    client.query('SELECT * FROM volunteers JOIN volunteer_skills ON volunteer_skills.volunteer_id=volunteers.id JOIN skills ON volunteer_skills.skill_id=skills.id WHERE email=$1;', [userEmail], function(err, result){
+      done();
+      if(err){
+        ('Error completing get skills on page load query', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows);
+        console.log(result.rows);
       }
     });
   });
@@ -127,24 +144,6 @@ router.put('/volunteer/skills/:id', function (req, res) {
   })
 });
 
-// clears availability section to prep for update
-// router.delete('/volunteer/availability/:id', function (req, res) {
-//   console.log('delete availability route hit');
-//   var volunteerId = req.params.id;
-//   pg.connect(connectionString, function (err, client, done) {
-//     client.query('DELETE FROM availability WHERE volunteer_id=$1', [volunteerId], function (err, result) {
-//       done();
-//       if (err) {
-//         console.log('Error completing delete availability query', err);
-//         res.sendStatus(500);
-//       } else {
-//         console.log('Success completing availability causes query');
-//         res.sendStatus(200);
-//       }
-//     });
-//   });
-// });
-
 // updates availability section
 router.put('/volunteer/availability/:id', function (req, res) {
   var volunteerId = req.params.id;
@@ -197,36 +196,6 @@ router.put('/volunteer/causes/:id', function (req, res) {
       }
     });
   })
-});
-
-//populates skills drop down list
-router.get('/skillList', function (req, res) {
-  pg.connect(connectionString, function (err, client, done) {
-    client.query('SELECT * FROM skills', function (err, result) {
-      done();
-      if (err) {
-        console.log('Error completing query', err);
-        res.sendStatus(500);
-      } else {
-        res.send(result.rows);
-      }
-    });
-  });
-});
-
-//populates causes drop down list
-router.get('/causeList', function (req, res) {
-  pg.connect(connectionString, function (err, client, done) {
-    client.query('SELECT * FROM causes', function (err, result) {
-      done();
-      if (err) {
-        console.log('Error completing cause list query', err);
-        res.sendStatus(500);
-      } else {
-        res.send(result.rows);
-      }
-    });
-  });
 });
 
 module.exports = router;
