@@ -15,7 +15,7 @@ router.get('/volunteer', function (req, res) {
         res.sendStatus(500);
       } else if (result.rows.length == 0) {
         pg.connect(connectionString, function (err, client, done) {
-          client.query('INSERT INTO volunteers (email) VALUES ($1) RETURNING id;', [userEmail], function (err, result) {
+          client.query('INSERT INTO volunteers (name, email, linkedin, bio) VALUES ($1, $2, $3, $4) RETURNING id;', ['Add your name', userEmail, 'Add your LinkedIn profile', 'Add your bio'], function (err, result) {
             done();
             if (err) {
               console.log('Error inserting new volunteer user', err);
@@ -106,29 +106,13 @@ router.get('/volunteer/causes', function(req, res){
   });
 });
 
-//clears "about me" section to prep for update
-router.delete('/volunteer/aboutMe/:id', function (req, res) {
-  var volunteerId = req.params.id;
-  pg.connect(connectionString, function (err, client, done) {
-    client.query('DELETE FROM volunteers WHERE id=$1;', [volunteerId], function (err, result) {
-      done();
-      if (err) {
-        console.log('Error completing delete about me query', err);
-        res.sendStatus(500);
-      } else {
-        res.sendStatus(200);
-      }
-    });
-  });
-});
-
 //updates "about me" section
 router.put('/volunteer/aboutMe/:id', function (req, res) {
   var volunteerId = req.params.id;
   var volunteerObject = req.body;
   pg.connect(connectionString, function (err, client, done) {
-    client.query('INSERT INTO volunteers (name, email, linkedin, bio) VALUES ($1, $2, $3, $4);',
-    [volunteerObject.name, volunteerObject.email, volunteerObject.linkedin, volunteerObject.bio], function (err, result) {
+    client.query('UPDATE volunteers SET name=$1, email=$2, linkedin=$3, bio=$4 WHERE id=$5;',
+    [volunteerObject.name, volunteerObject.email, volunteerObject.linkedin, volunteerObject.bio, volunteerId], function (err, result) {
       done();
       if (err) {
         console.log('Error completing update about me query', err);

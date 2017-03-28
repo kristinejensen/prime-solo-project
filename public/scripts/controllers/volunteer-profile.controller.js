@@ -96,26 +96,6 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.skills = DataFactory.skills;
   self.causes = DataFactory.causes;
 
-  //function to clear "about me" section before updating
-  self.clearAboutMe = function(volunteerId){
-    var firebaseUser = auth.$getAuth();
-    if(firebaseUser){
-      firebaseUser.getToken().then(function(idToken){
-        $http({
-          method: 'DELETE',
-          url: '/data/volunteer/aboutMe/' + volunteerId,
-          headers: {
-            id_token: idToken
-          }
-        }).then(function(response){
-          console.log('delete about me successful');
-        })
-      })
-    } else {
-      console.log('Not logged in or not authorized.');
-    }
-    getVolunteer();
-  };
 
   //function to update "about me" section
   self.updateAboutMe = function(volunteerId){

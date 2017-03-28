@@ -28,7 +28,7 @@
       <div class="col-sm-10">
         <textarea ng-model="vp.volunteerProfile.bio" class="form-control" name="bio"></textarea>
       </div>
-      <button ng-click="vp.clearAboutMe(vp.volunteerProfile.id); vp.updateAboutMe(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button>
+      <button ng-click="vp.updateAboutMe(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button>
       <h4 class="heading">SKILLS</h4>
       <p>Skill One: {{vp.volunteerSkills[0].skill}}</p>
       <p>Skill Two: {{vp.volunteerSkills[0].skill}}</p>
