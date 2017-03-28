@@ -56,15 +56,32 @@ router.get('/volunteer', function (req, res) {
   });
 });
 
-//populates volunteer profile with existing user data || adds a new user to the db
+//populates volunteer profile with skill data on page load
 router.get('/volunteer/skills', function(req, res){
-  console.log('get skills route hit');
   var userEmail = req.decodedToken.email;
   pg.connect(connectionString, function (err, client, done) {
     client.query('SELECT * FROM volunteers JOIN volunteer_skills ON volunteer_skills.volunteer_id=volunteers.id JOIN skills ON volunteer_skills.skill_id=skills.id WHERE email=$1;', [userEmail], function(err, result){
       done();
       if(err){
         ('Error completing get skills on page load query', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows);
+        console.log(result.rows);
+      }
+    });
+  });
+});
+
+//populates volunteer profile with cause data on page load
+router.get('/volunteer/causes', function(req, res){
+  console.log('get causes route hit');
+  var userEmail = req.decodedToken.email;
+  pg.connect(connectionString, function (err, client, done) {
+    client.query('SELECT * FROM volunteers JOIN volunteer_causes ON volunteer_causes.volunteer_id=volunteers.id JOIN causes ON volunteer_causes.cause_id=causes.id WHERE email=$1;', [userEmail], function(err, result){
+      done();
+      if(err){
+        ('Error completing get causes on page load query', err);
         res.sendStatus(500);
       } else {
         res.send(result.rows);

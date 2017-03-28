@@ -30,9 +30,9 @@
       </div>
       <button ng-click="vp.clearAboutMe(vp.volunteerProfile.id); vp.updateAboutMe(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button>
       <h4 class="heading">SKILLS</h4>
-      <p>Skill: {{vp.volunteerProfile.skillOne}}</p>
-      <p>Skill: {{vp.volunteerProfile.skillTwo}}</p>
-      <p>Skill: {{vp.volunteerProfile.skillThree}}</p>
+      <p>Skill One: {{vp.volunteerSkills[0].skill}}</p>
+      <p>Skill Two: {{vp.volunteerSkills[0].skill}}</p>
+      <p>Skill Three: {{vp.volunteerSkills[0].skill}}</p>
       <select ng-model="vp.volunteerProfile.skillOne" ng-options="item as item.skill for item in vp.skills.list"></select>
       <select ng-model="vp.volunteerProfile.skillTwo" ng-options="item as item.skill for item in vp.skills.list"></select>
       <select ng-model="vp.volunteerProfile.skillThree" ng-options="item as item.skill for item in vp.skills.list"></select><br>
@@ -52,9 +52,9 @@
       <input type="checkbox" name="open" ng-model="vp.availabilityData.open"><br>
       <button ng-click="vp.clearAvailability(vp.volunteerProfile.id); vp.updateAvailability(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button><br>
       <h4 class="heading">CAUSES</h4>
-      <p>Cause: {{vp.volunteerProfile.causeOne}}</p>
-      <p>Cause: {{vp.volunteerProfile.causeTwo}}</p>
-      <p>Cause: {{vp.volunteerProfile.causeThree}}</p>
+      <p>Cause One: {{vp.volunteerCauses[0].cause}}</p>
+      <p>Cause Two: {{vp.volunteerCauses[0].cause}}</p>
+      <p>Cause Three: {{vp.volunteerCauses[0].cause}}</p>
       <select ng-model="vp.volunteerProfile.causeOne" ng-options="item as item.cause for item in vp.causes.list"></select>
       <select ng-model="vp.volunteerProfile.causeTwo" ng-options="item as item.cause for item in vp.causes.list"></select>
       <select ng-model="vp.volunteerProfile.causeThree" ng-options="item as item.cause for item in vp.causes.list"></select><br>
