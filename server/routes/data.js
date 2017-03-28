@@ -67,7 +67,23 @@ router.get('/volunteer/skills', function(req, res){
         res.sendStatus(500);
       } else {
         res.send(result.rows);
-        console.log(result.rows);
+      }
+    });
+  });
+});
+
+//populates volunteer profile with availability data on page load
+router.get('/volunteer/availability', function(req, res){
+  var userEmail = req.decodedToken.email;
+  pg.connect(connectionString, function (err, client, done) {
+    client.query('SELECT * FROM availability JOIN volunteers ON volunteers.id=availability.volunteer_id WHERE email=$1;', [userEmail], function(err, result){
+      done();
+      if(err){
+        ('Error completing get availability on page load query', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows[0]);
+        console.log(result.rows[0]);
       }
     });
   });
@@ -85,7 +101,6 @@ router.get('/volunteer/causes', function(req, res){
         res.sendStatus(500);
       } else {
         res.send(result.rows);
-        console.log(result.rows);
       }
     });
   });

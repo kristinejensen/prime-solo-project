@@ -8,8 +8,10 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.volunteerCauses = {};
 
   auth.$onAuthStateChanged(getVolunteer);
-  getSkills();
-  getCauses();
+  auth.$onAuthStateChanged(getSkills);
+  auth.$onAuthStateChanged(getAvailability);
+  auth.$onAuthStateChanged(getCauses);
+
 
   //populates volunteer profile information on page load
   function getVolunteer(){
@@ -44,7 +46,6 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           self.volunteerSkills = response.data;
-          console.log(self.volunteerSkills);
         })
       })
     } else {
@@ -52,7 +53,27 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     }
   };
 
-  //populates volunteer cause information on page load
+  //populates volunteer availability information on page load
+  function getAvailability(){
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser) {
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'GET',
+          url: '/data/volunteer/availability',
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          self.availabilityData = response.data;
+        })
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+  };
+
+  // populates volunteer cause information on page load
   function getCauses(){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser) {
@@ -65,14 +86,12 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           self.volunteerCauses = response.data;
-          console.log(self.volunteerCauses);
         })
       })
     } else {
       console.log('Not logged in or not authorized.');
     }
   };
-
 
   self.skills = DataFactory.skills;
   self.causes = DataFactory.causes;
