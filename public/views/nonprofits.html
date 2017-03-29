@@ -1,18 +1,32 @@
-<h4 class="text-center">Nonprofits, search for skilled<br>volunteers to support your cause.</h4>
-<h4 class="heading">SKILLS</h4>
-<select ng-model="vp.searchSkills" ng-options="item as item.skill for item in nc.skills.list"></select>
-<h4 class="heading">CAUSES</h4>
-<select ng-model="vp.searchCauses" ng-options="item as item.cause for item in nc.causes.list"></select>
-<h4 class="heading">AVAILABILITY</h4>
-<label for="morning">Morning</label>
-<input type="checkbox" name="morning" ng-model="nc.searchAvailability.morning">
-<label for="afternoon">Afternoon</label>
-<input type="checkbox" name="afternoon" ng-model="nc.searchAvailability.afternoon">
-<label for="evening">Evening</label>
-<input type="checkbox" name="evening" ng-model="nc.searchAvailability.evening"><br>
-<label for="weekdays">Weekdays</label>
-<input type="checkbox" name="weekedays" ng-model="nc.searchAvailability.weekdays">
-<label for="weekends">Weekends</label>
-<input type="checkbox" name="weekends" ng-model="nc.searchAvailability.weekends">
-<label for="open">Open Availability</label>
-<input type="checkbox" name="open" ng-model="nc.searchAvailability.open"><br>
+<form>
+  <div class="container">
+    <h4 class="text-center">Nonprofits, search for skilled<br>volunteers to support your cause.</h4>
+    <h4 class="heading">SKILLS</h4>
+    <select ng-model="vp.searchObject.skill" ng-options="item as item.skill for item in nc.skills.list" class="searchElement"></select>
+    <h4 class="heading">CAUSES</h4>
+    <select ng-model="vp.searchObject.cause" ng-options="item as item.cause for item in nc.causes.list" class="searchElement"></select>
+    <h4 class="heading">AVAILABILITY</h4>
+    <label for="morning">Morning</label>
+    <input type="checkbox" name="morning" ng-model="nc.searchObject.morning">
+    <label for="afternoon">Afternoon</label>
+    <input type="checkbox" name="afternoon" ng-model="nc.searchObject.afternoon">
+    <label for="evening">Evening</label>
+    <input type="checkbox" name="evening" ng-model="nc.searchObject.evening"><br>
+    <label for="weekdays">Weekdays</label>
+    <input type="checkbox" name="weekedays" ng-model="nc.searchObject.weekdays">
+    <label for="weekends">Weekends</label>
+    <input type="checkbox" name="weekends" ng-model="nc.searchObject.weekends">
+    <label for="open">Open Availability</label>
+    <input type="checkbox" name="open" ng-model="nc.searchObject.open"><br>
+    <button ng-click="vp.searchVolunteer()" type="button" name="button" class="btn btn-primary" id="searchButton">Search</button>
+  </div>
+</form>
+
+
+<!-- pass in result to button click
+sends the string to controller
+create one object in your controller that has properties from button clicks
+sends an object to the database with different key/value pairs
+empty object in factory for object to send
+need empty volunteers object
+sending object to db via params -->

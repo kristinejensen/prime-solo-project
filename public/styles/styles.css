@@ -1,18 +1,22 @@
-.heading {
-
+.searchElement {
+  margin-bottom: 20px;
 }
 
-.save{
+.save {
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-#volunteersButton{
+#volunteersButton {
   margin-top: 30px;
   margin-bottom: 10px;
 }
 
-#nonprofitsButton{
+#nonprofitsButton {
   margin-top: 30px;
   margin-bottom: 10px;
+}
+
+#searchButton {
+  margin-top: 20px;
 }

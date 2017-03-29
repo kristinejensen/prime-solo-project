@@ -1,9 +1,8 @@
 app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFactory, $http) {
   var self = this;
 
-  self.searchSkills = {};
-  self.searchCauses = {};
-  self.searchAvailability = {};
+  self.searchObject = {};
+  console.log(self.searchObject);
 
   //accesses information from public API
     self.skills = DataFactory.skills;
