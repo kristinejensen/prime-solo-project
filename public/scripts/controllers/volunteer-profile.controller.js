@@ -10,9 +10,9 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.availabilityData = {};
 
   getVolunteer();
-  // getSkills();
-  // getCauses();
-  // getAvailability();
+  getSkills();
+  getCauses();
+  getAvailability();
 
   auth.$onAuthStateChanged(getVolunteer);
   auth.$onAuthStateChanged(getSkills);
@@ -114,12 +114,12 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           console.log('insert about me successful');
+          getVolunteer();
         })
       })
     } else {
       console.log('Not logged in or not authorized.');
     }
-    getVolunteer();
   };
 
 
@@ -137,12 +137,13 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           console.log('insert skill successful');
+          getSkills();
         })
       })
     } else {
       console.log('Not logged in or not authorized.');
     }
-    getVolunteer();
+
   };
 
   // function to add a cause
@@ -159,12 +160,12 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           console.log('insert cause successful');
+          getCauses();
         })
       })
     } else {
       console.log('Not logged in or not authorized.');
     }
-    getVolunteer();
   };
 
   //function to update availability section
@@ -182,12 +183,12 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           console.log('insert availability successful');
+          getAvailability();
         })
       })
     } else {
       console.log('Not logged in or not authorized.');
     }
-    getVolunteer();
   };
 
   // self.deleteProfile = function(volunteerId){
