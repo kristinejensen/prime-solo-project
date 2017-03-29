@@ -1,48 +1,29 @@
-app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
-  var auth = $firebaseAuth();
+app.factory('DataFactory', ['$http', function($http){
   var skills = {list: []};
   var causes = {list: []};
-auth.$onAuthStateChanged(skillList);
-auth.$onAuthStateChanged(causeList);
+
+  skillList();
+  causeList();
 
 //function to populate skills list
   function skillList(){
-    var firebaseUser = auth.$getAuth();
-    if(firebaseUser) {
-      firebaseUser.getToken().then(function(idToken){
+
         $http({
           method: 'GET',
-          url: '/list_data/skillList',
-          headers: {
-            id_token: idToken
-          }
+          url: '/list_data/skillList'
         }).then(function(response){
           skills.list = response.data;
         })
-      })
-    } else {
-      console.log('Not logged in or not authorized.');
-    }
   };
 
 //function to populate causes list
   function causeList(){
-    var firebaseUser = auth.$getAuth();
-    if(firebaseUser) {
-      firebaseUser.getToken().then(function(idToken){
         $http({
           method: 'GET',
-          url: '/list_data/causeList',
-          headers: {
-            id_token: idToken
-          }
+          url: '/list_data/causeList'
         }).then(function(response){
           causes.list = response.data;
         })
-      })
-    } else {
-      console.log('Not logged in or not authorized.');
-    }
   };
 
   return {

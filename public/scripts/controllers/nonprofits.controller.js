@@ -1,8 +1,8 @@
-app.controller('NonprofitController', ['$http', 'DataFactory', function($http, DataFactory){
+app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFactory, $http) {
   var self = this;
 
-//accesses information from public API
-  self.skills = DataFactory.skills;
-  self.causes = DataFactory.causes;
+  //accesses information from public API
+    self.skills = DataFactory.skills;
+    self.causes = DataFactory.causes;
 
 }]);

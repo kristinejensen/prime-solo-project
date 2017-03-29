@@ -161,4 +161,22 @@ router.put('/volunteer/availability/:id', function (req, res) {
   });
 });
 
+// deletes volunteer profile
+// router.delete('/volunteer/delete/:id', function (req, res) {
+//   var volunteerId = req.params.id;
+//   console.log('delete volunteer profile route hit');
+//   pg.connect(connectionString, function (err, client, done) {
+//     client.query('DELETE FROM availability WHERE volunteer_id=$7;',[volunteerId], function (err, result) {
+//       done();
+//       if (err) {
+//         console.log('Error deleting availability', err);
+//         res.sendStatus(500);
+//       } else {
+//         res.sendStatus(200);
+//       }
+//     });
+//   });
+// });
+
+
 module.exports = router;

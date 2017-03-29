@@ -4,7 +4,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
 
 
   self.volunteerProfile = {};
-  self.addSkill={};
+  self.addSkill = {};
   self.addCause = {};
   self.volunteerSkills = {};
   self.volunteerCauses = {};
@@ -116,13 +116,13 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
         }).then(function(response){
           console.log('insert about me successful');
           getVolunteer();
+          alert('"About Me" updates saved!');
         })
       })
     } else {
       console.log('Not logged in or not authorized.');
     }
   };
-
 
   // function to add a skill
   self.addSkillButton = function(volunteerId){
@@ -139,6 +139,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
         }).then(function(response){
           console.log('insert skill successful');
           getSkills();
+          alert('Skill added!');
         })
       })
     } else {
@@ -162,6 +163,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
         }).then(function(response){
           console.log('insert cause successful');
           getCauses();
+          alert('Cause added!');
         })
       })
     } else {
@@ -185,6 +187,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
         }).then(function(response){
           console.log('insert availability successful');
           getAvailability();
+          alert('Availability updates saved!');
         })
       })
     } else {
@@ -193,8 +196,25 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   };
 
   // self.deleteProfile = function(volunteerId){
-  //
-  // }
+  //   console.log('delete profile button clicked');
+  //   console.log(volunteerId);
+  //   var firebaseUser = auth.$getAuth();
+  //   if(firebaseUser){
+  //     firebaseUser.getToken().then(function(idToken){
+  //       $http({
+  //         method: 'DELETE',
+  //         url: '/data/volunteer/delete/' + volunteerId,
+  //         headers: {
+  //           id_token: idToken
+  //         }
+  //       }).then(function(response){
+  //         console.log('delete volunteer successful');
+  //       })
+  //     })
+  //   } else {
+  //     console.log('Not logged in or not authorized.');
+  //   }
+  // };
 
   // function that logs user out on button click
   self.logOut = function(){

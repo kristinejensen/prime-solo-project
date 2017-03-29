@@ -15,13 +15,15 @@ app.get('/', function(req, res){
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
+
+app.use('/list_data', list_data);
+
 app.use(decoder.token);
 
 /* Whatever you do below this is protected by your authentication. */
 
 app.use('/login', login);
 app.use('/data', data);
-app.use('/list_data', list_data);
 
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);
