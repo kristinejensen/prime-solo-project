@@ -1,8 +1,18 @@
-<h5 class="text-center">Nonprofits, search for skilled<br>volunteers to support your cause.</h5>
-
+<h4 class="text-center">Nonprofits, search for skilled<br>volunteers to support your cause.</h4>
 <h4 class="heading">SKILLS</h4>
-<div ng-repeat="item in nc.volunteerSkills">
-  <p>{{item.skill}}</p>
-</div>
-
-{{nc}}
+<select ng-model="vp.searchSkills" ng-options="item as item.skill for item in nc.skills.list"></select>
+<h4 class="heading">CAUSES</h4>
+<select ng-model="vp.searchCauses" ng-options="item as item.cause for item in nc.causes.list"></select>
+<h4 class="heading">AVAILABILITY</h4>
+<label for="morning">Morning</label>
+<input type="checkbox" name="morning" ng-model="nc.searchAvailability.morning">
+<label for="afternoon">Afternoon</label>
+<input type="checkbox" name="afternoon" ng-model="nc.searchAvailability.afternoon">
+<label for="evening">Evening</label>
+<input type="checkbox" name="evening" ng-model="nc.searchAvailability.evening"><br>
+<label for="weekdays">Weekdays</label>
+<input type="checkbox" name="weekedays" ng-model="nc.searchAvailability.weekdays">
+<label for="weekends">Weekends</label>
+<input type="checkbox" name="weekends" ng-model="nc.searchAvailability.weekends">
+<label for="open">Open Availability</label>
+<input type="checkbox" name="open" ng-model="nc.searchAvailability.open"><br>
