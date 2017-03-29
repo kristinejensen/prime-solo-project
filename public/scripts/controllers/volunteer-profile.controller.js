@@ -3,10 +3,12 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   var auth = $firebaseAuth();
 
   self.volunteerProfile = {};
-  self.volunteerSkills = {};
   self.addSkill={};
-  self.availabilityData = {};
+  self.addCause = {};
+  self.volunteerSkills = {};
   self.volunteerCauses = {};
+  self.availabilityData = {};
+
 
   auth.$onAuthStateChanged(getVolunteer);
   auth.$onAuthStateChanged(getSkills);
@@ -47,6 +49,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           self.volunteerSkills = response.data;
+          console.log(self.volunteerSkills);
         })
       })
     } else {
@@ -134,7 +137,29 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
             id_token: idToken
           }
         }).then(function(response){
-          console.log('insert skills successful');
+          console.log('insert skill successful');
+        })
+      })
+    } else {
+      console.log('Not logged in or not authorized.');
+    }
+    getVolunteer();
+  };
+
+  // function to add a cause
+  self.addCauseButton = function(volunteerId){
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebaseUser.getToken().then(function(idToken){
+        $http({
+          method: 'POST',
+          url: '/data/volunteer/causes/' + volunteerId,
+          data: self.addCause,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          console.log('insert cause successful');
         })
       })
     } else {
@@ -158,28 +183,6 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           console.log('insert availability successful');
-        })
-      })
-    } else {
-      console.log('Not logged in or not authorized.');
-    }
-    getVolunteer();
-  };
-
-  // function to update causes section
-  self.updateCauses = function(volunteerId){
-    var firebaseUser = auth.$getAuth();
-    if(firebaseUser){
-      firebaseUser.getToken().then(function(idToken){
-        $http({
-          method: 'PUT',
-          url: '/data/volunteer/causes/' + volunteerId,
-          data: self.volunteerProfile,
-          headers: {
-            id_token: idToken
-          }
-        }).then(function(response){
-          console.log('insert causes successful');
         })
       })
     } else {

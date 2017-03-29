@@ -30,8 +30,17 @@
       </div>
       <button ng-click="vp.updateAboutMe(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button>
       <h4 class="heading">SKILLS</h4>
+      <div ng-repeat="item in vp.volunteerSkills">
+        <p>{{item.skill}}</p>
+      </div>
       <select ng-model="vp.addSkill" ng-options="item as item.skill for item in vp.skills.list"></select>
       <button ng-click="vp.addSkillButton(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Add skill</button><br>
+      <h4 class="heading">CAUSES</h4>
+      <div ng-repeat="item in vp.volunteerCauses">
+        <p>{{item.cause}}</p>
+      </div>
+      <select ng-model="vp.addCause" ng-options="item as item.cause for item in vp.causes.list"></select>
+      <button ng-click="vp.addCauseButton(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button><br>
       <h4 class="heading">AVAILABILITY</h4>
       <label for="morning">Morning</label>
       <input type="checkbox" name="morning" ng-model="vp.availabilityData.morning">
@@ -46,14 +55,6 @@
       <label for="open">Open Availability</label>
       <input type="checkbox" name="open" ng-model="vp.availabilityData.open"><br>
       <button ng-click="vp.clearAvailability(vp.volunteerProfile.id); vp.updateAvailability(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button><br>
-      <h4 class="heading">CAUSES</h4>
-      <p>Cause One: {{vp.volunteerCauses[0].cause}}</p>
-      <p>Cause Two: {{vp.volunteerCauses[0].cause}}</p>
-      <p>Cause Three: {{vp.volunteerCauses[0].cause}}</p>
-      <select ng-model="vp.volunteerProfile.causeOne" ng-options="item as item.cause for item in vp.causes.list"></select>
-      <select ng-model="vp.volunteerProfile.causeTwo" ng-options="item as item.cause for item in vp.causes.list"></select>
-      <select ng-model="vp.volunteerProfile.causeThree" ng-options="item as item.cause for item in vp.causes.list"></select><br>
-      <button ng-click="vp.updateCauses(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button><br>
       <button ng-click="vp.deleteProfile(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-danger">Delete Profile</button>
     </div>
   </form>

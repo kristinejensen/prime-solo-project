@@ -142,6 +142,24 @@ router.post('/volunteer/skills/:id', function (req, res) {
   });
 });
 
+//updates causes section
+router.post('/volunteer/causes/:id', function (req, res) {
+  var volunteerId = req.params.id;
+  var volunteerObject = req.body;
+  pg.connect(connectionString, function (err, client, done){
+    client.query('INSERT INTO volunteer_causes (cause_id, volunteer_id) VALUES ($1, $2);',
+    [volunteerObject.id, volunteerId], function (err, result){
+      done();
+      if(err){
+        console.log('Error inserting cause');
+        res.sendStatus(500);
+      }else{
+        res.sendStatus(200);
+      }
+    });
+  });
+});
+
 // updates availability section
 router.put('/volunteer/availability/:id', function (req, res) {
   var volunteerId = req.params.id;
@@ -160,40 +178,6 @@ router.put('/volunteer/availability/:id', function (req, res) {
   });
 });
 
-//updates causes section
-router.put('/volunteer/causes/:id', function (req, res) {
-  var volunteerId = req.params.id;
-  var volunteerObject = req.body;
-  pg.connect(connectionString, function (err, client, done) {
-    client.query('UPDATE volunteer_causes SET volunteer_id=$1, cause_id=$2;',
-    [volunteerId, volunteerObject.causeOne.id], function (err, result) {
-      done();
-      if (err) {
-        console.log('Error updating cause one', err);
-        res.sendStatus(500);
-      } else {
-        client.query('UPDATE volunteer_causes SET volunteer_id=$1, cause_id=$2;',
-        [volunteerId, volunteerObject.causeTwo.id], function (err, result) {
-          done();
-          if (err) {
-            console.log('Error updating cause two', err);
-            res.sendStatus(500);
-          } else {
-            client.query('UPDATE volunteer_causes SET volunteer_id=$1, cause_id=$2;',
-            [volunteerId, volunteerObject.causeThree.id], function (err, result) {
-              done();
-              if (err) {
-                console.log('Error updating cause three', err);
-                res.sendStatus(500);
-              } else {
-                res.sendStatus(200);
-              }
-            });
-          }
-        });
-      }
-    });
-  })
-});
+
 
 module.exports = router;
