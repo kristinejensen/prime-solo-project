@@ -124,7 +124,7 @@ router.put('/volunteer/aboutMe/:id', function (req, res) {
   });
 });
 
-//updates skills section
+//inserts skills
 router.post('/volunteer/skills/:id', function (req, res) {
   var volunteerId = req.params.id;
   var volunteerObject = req.body;
@@ -142,7 +142,7 @@ router.post('/volunteer/skills/:id', function (req, res) {
   });
 });
 
-//updates causes section
+//inserts causes
 router.post('/volunteer/causes/:id', function (req, res) {
   var volunteerId = req.params.id;
   var volunteerObject = req.body;
@@ -177,7 +177,5 @@ router.put('/volunteer/availability/:id', function (req, res) {
     });
   });
 });
-
-
 
 module.exports = router;

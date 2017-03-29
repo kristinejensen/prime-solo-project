@@ -9,12 +9,15 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.volunteerCauses = {};
   self.availabilityData = {};
 
+  getVolunteer();
+  // getSkills();
+  // getCauses();
+  // getAvailability();
 
   auth.$onAuthStateChanged(getVolunteer);
   auth.$onAuthStateChanged(getSkills);
   auth.$onAuthStateChanged(getAvailability);
   auth.$onAuthStateChanged(getCauses);
-
 
   //populates volunteer profile information on page load
   function getVolunteer(){
@@ -96,10 +99,6 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
       console.log('Not logged in or not authorized.');
     }
   };
-
-  self.skills = DataFactory.skills;
-  self.causes = DataFactory.causes;
-
 
   //function to update "about me" section
   self.updateAboutMe = function(volunteerId){
@@ -207,5 +206,9 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.redirectHome = function(){
     $location.url('/home');
   }
+
+//accesses information from public API
+  self.skills = DataFactory.skills;
+  self.causes = DataFactory.causes;
 
 }]);
