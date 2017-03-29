@@ -21,29 +21,13 @@ router.get('/volunteer', function (req, res) {
               console.log('Error inserting new volunteer user', err);
               res.sendStatus(500);
             } else {
-              client.query('INSERT INTO volunteer_skills (volunteer_id, skill_id) VALUES ($1, $2), ($1, $2), ($1, $2) RETURNING volunteer_id;', [result.rows[0].id, 47],
-              function (err, result) {
-                if (err) {
-                  console.log('Error adding default skills', err);
+              client.query('INSERT INTO availability (morning, afternoon, evening, weekdays, weekends, open, volunteer_id) VALUES ($1, $2, $3, $4, $5, $6, $7);', [false, false, false, false, false, false, result.rows[0].id],
+              function(err, result){
+                if(err){
+                  console.log('Error adding default availability', err);
                   res.sendStatus(500);
                 } else {
-                  client.query('INSERT INTO volunteer_causes (volunteer_id, cause_id) VALUES ($1, $2), ($1, $2), ($1, $2) RETURNING volunteer_id;', [result.rows[0].volunteer_id, 23],
-                  function(err, result){
-                    if (err){
-                      console.log('Error adding default causes', err);
-                      res.sendStatus(500);
-                    } else {
-                      client.query('INSERT INTO availability (morning, afternoon, evening, weekdays, weekends, open, volunteer_id) VALUES ($1, $2, $3, $4, $5, $6, $7);', [false, false, false, false, false, false, result.rows[0].volunteer_id],
-                      function(err, result){
-                        if(err){
-                          console.log('Error adding default availability', err);
-                          res.sendStatus(500);
-                        } else {
-                          res.send({email: userEmail});
-                        }
-                      });
-                    }
-                  });
+                  res.send({email: userEmail});
                 }
               });
             }
@@ -91,7 +75,6 @@ router.get('/volunteer/availability', function(req, res){
 
 //populates volunteer profile with cause data on page load
 router.get('/volunteer/causes', function(req, res){
-  console.log('get causes route hit');
   var userEmail = req.decodedToken.email;
   pg.connect(connectionString, function (err, client, done) {
     client.query('SELECT * FROM volunteers JOIN volunteer_causes ON volunteer_causes.volunteer_id=volunteers.id JOIN causes ON volunteer_causes.cause_id=causes.id WHERE email=$1;', [userEmail], function(err, result){

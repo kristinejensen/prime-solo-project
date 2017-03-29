@@ -2,6 +2,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   var self = this;
   var auth = $firebaseAuth();
 
+
   self.volunteerProfile = {};
   self.addSkill={};
   self.addCause = {};
