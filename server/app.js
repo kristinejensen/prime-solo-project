@@ -6,6 +6,7 @@ var decoder = require('./modules/decoder');
 var login = require('./routes/login');
 var data = require('./routes/data');
 var list_data = require('./routes/list_data');
+var search = require('./routes/search');
 var portDecision = process.env.PORT || 5000;
 
 app.get('/', function(req, res){
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 
 
 app.use('/list_data', list_data);
+app.use('/search', search);
 
 app.use(decoder.token);
 

@@ -1,7 +1,7 @@
 app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFactory, $http) {
   var self = this;
 
-  var volunteerResultList = {list: []};
+  var volunteerList = {list: []};
 
   self.searchObject = {};
 
@@ -16,8 +16,14 @@ app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFac
       weekendAvailability: self.searchObject.weekends,
       openAvailability: self.searchObject.open
     };
-
-    
+    $http({
+      method: 'GET',
+      url: '/search/volunteer',
+      params: params
+    }).then(function (response){
+      volunteerList.list = response.data;
+      console.log(volunteerList.list);
+    });
   }; //end of searchVolunteers function
 
 
