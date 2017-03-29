@@ -4,6 +4,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
 
   self.volunteerProfile = {};
   self.volunteerSkills = {};
+  self.addSkill={};
   self.availabilityData = {};
   self.volunteerCauses = {};
 
@@ -120,16 +121,15 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   };
 
 
-  // function to update skills section
-  self.updateSkills = function(volunteerId){
-    console.log('update skills button clicked');
+  // function to add a skill
+  self.addSkillButton = function(volunteerId){
     var firebaseUser = auth.$getAuth();
     if(firebaseUser){
       firebaseUser.getToken().then(function(idToken){
         $http({
-          method: 'PUT',
+          method: 'POST',
           url: '/data/volunteer/skills/' + volunteerId,
-          data: self.volunteerProfile,
+          data: self.addSkill,
           headers: {
             id_token: idToken
           }

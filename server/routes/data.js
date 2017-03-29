@@ -125,39 +125,21 @@ router.put('/volunteer/aboutMe/:id', function (req, res) {
 });
 
 //updates skills section
-router.put('/volunteer/skills/:id', function (req, res) {
+router.post('/volunteer/skills/:id', function (req, res) {
   var volunteerId = req.params.id;
   var volunteerObject = req.body;
-  pg.connect(connectionString, function (err, client, done) {
-    client.query('UPDATE volunteer_skills SET volunteer_id=$1, skill_id=$2;',
-    [volunteerId, volunteerObject.skillOne.id], function (err, result) {
+  pg.connect(connectionString, function (err, client, done){
+    client.query('INSERT INTO volunteer_skills (skill_id, volunteer_id) VALUES ($1, $2);',
+    [volunteerObject.id, volunteerId], function (err, result){
       done();
-      if (err) {
-        console.log('Error updating skill one', err);
+      if(err){
+        console.log('Error inserting skill');
         res.sendStatus(500);
-      } else {
-        client.query('UPDATE volunteer_skills SET volunteer_id=$1, skill_id=$2;',
-        [volunteerId, volunteerObject.skillTwo.id], function (err, result) {
-          done();
-          if (err) {
-            console.log('Error updating skill two', err);
-            res.sendStatus(500);
-          } else {
-            client.query('UPDATE volunteer_skills SET volunteer_id=$1, skill_id=$2;',
-            [volunteerId, volunteerObject.skillThree.id], function (err, result) {
-              done();
-              if (err) {
-                console.log('Error updating skill three', err);
-                res.sendStatus(500);
-              } else {
-                res.sendStatus(200);
-              }
-            });
-          }
-        });
+      }else{
+        res.sendStatus(200);
       }
     });
-  })
+  });
 });
 
 // updates availability section

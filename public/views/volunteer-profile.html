@@ -30,13 +30,8 @@
       </div>
       <button ng-click="vp.updateAboutMe(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button>
       <h4 class="heading">SKILLS</h4>
-      <p>Skill One: {{vp.volunteerSkills[0].skill}}</p>
-      <p>Skill Two: {{vp.volunteerSkills[0].skill}}</p>
-      <p>Skill Three: {{vp.volunteerSkills[0].skill}}</p>
-      <select ng-model="vp.volunteerProfile.skillOne" ng-options="item as item.skill for item in vp.skills.list"></select>
-      <select ng-model="vp.volunteerProfile.skillTwo" ng-options="item as item.skill for item in vp.skills.list"></select>
-      <select ng-model="vp.volunteerProfile.skillThree" ng-options="item as item.skill for item in vp.skills.list"></select><br>
-      <button ng-click="vp.updateSkills(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Save</button><br>
+      <select ng-model="vp.addSkill" ng-options="item as item.skill for item in vp.skills.list"></select>
+      <button ng-click="vp.addSkillButton(vp.volunteerProfile.id)" type="button" name="button" class="btn btn-primary btn-sm save">Add skill</button><br>
       <h4 class="heading">AVAILABILITY</h4>
       <label for="morning">Morning</label>
       <input type="checkbox" name="morning" ng-model="vp.availabilityData.morning">
