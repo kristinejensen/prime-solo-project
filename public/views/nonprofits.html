@@ -2,9 +2,9 @@
   <div class="container">
     <h4 class="text-center">Nonprofits, search for skilled<br>volunteers to support your cause.</h4>
     <h4 class="heading">SKILLS</h4>
-    <select ng-model="vp.searchObject.skill" ng-options="item as item.skill for item in nc.skills.list" class="searchElement"></select>
+    <select ng-model="nc.searchObject.skill" ng-options="item as item.skill for item in nc.skills.list" class="searchElement"></select>
     <h4 class="heading">CAUSES</h4>
-    <select ng-model="vp.searchObject.cause" ng-options="item as item.cause for item in nc.causes.list" class="searchElement"></select>
+    <select ng-model="nc.searchObject.cause" ng-options="item as item.cause for item in nc.causes.list" class="searchElement"></select>
     <h4 class="heading">AVAILABILITY</h4>
     <label for="morning">Morning</label>
     <input type="checkbox" name="morning" ng-model="nc.searchObject.morning">
@@ -18,7 +18,15 @@
     <input type="checkbox" name="weekends" ng-model="nc.searchObject.weekends">
     <label for="open">Open Availability</label>
     <input type="checkbox" name="open" ng-model="nc.searchObject.open"><br>
-    <button ng-click="vp.searchVolunteer()" type="button" name="button" class="btn btn-primary" id="searchButton">Search</button>
+    <button ng-click="nc.searchVolunteers()" type="button" name="button" class="btn btn-primary" id="searchButton">Search</button>
+    {{nc.searchObject.skill.id}}
+    {{nc.searchObject.cause.id}}
+    {{nc.searchObject.morning}}
+    {{nc.searchObject.afternoon}}
+    {{nc.searchObject.evening}}
+    {{nc.searchObject.weekdays}}
+    {{nc.searchObject.weekends}}
+    {{nc.searchObject.open}}
   </div>
 </form>
 
