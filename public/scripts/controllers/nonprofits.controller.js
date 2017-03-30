@@ -2,9 +2,9 @@ app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFac
   var self = this;
 
   self.volunteerList = {list: []};
-
   self.searchObject = {};
 
+// function to query db for matching volunteers
   self.searchVolunteers = function(){
     var params = {
       skill: self.searchObject.skill.id,
@@ -21,10 +21,12 @@ app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFac
       url: '/search/volunteer',
       params: params
     }).then(function (response){
+      console.log(response.data);
       self.volunteerList.list = response.data;
+      if(self.volunteerList.list.length == 0)
+      alert('Sorry, we did not find any matching volunteers.')
     });
-  }; //end of searchVolunteers function
-
+  };
 
     //accesses information from public API
       self.skills = DataFactory.skills;

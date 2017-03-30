@@ -42,7 +42,7 @@ router.get('/volunteer', function (req, res) {
         }
       });
     }
-})
+  })
 });
 
 module.exports = router;

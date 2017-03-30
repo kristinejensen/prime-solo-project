@@ -1,4 +1,5 @@
 app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$location', 'DataFactory', function($firebaseAuth, $http, $location, DataFactory){
+
   var self = this;
   var auth = $firebaseAuth();
 
@@ -112,7 +113,8 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
         }).then(function(response){
           console.log('insert about me successful');
           getVolunteer();
-          alert('"About Me" updates saved!');
+          swal('Updated!');
+          // alert('"About Me" updates saved!');
         })
       })
     } else {

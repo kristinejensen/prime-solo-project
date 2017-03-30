@@ -1,11 +1,11 @@
 <form>
   <div class="container">
     <h4 class="text-center">Nonprofits, search for skilled<br>volunteers to support your cause.</h4>
-    <h4>SKILLS</h4>
+    <h4>NEEDED SKILLS</h4>
     <select ng-model="nc.searchObject.skill" ng-options="item as item.skill for item in nc.skills.list" class="text"></select>
     <h4>CAUSES</h4>
     <select ng-model="nc.searchObject.cause" ng-options="item as item.cause for item in nc.causes.list" class="searchElement"></select>
-    <h4>AVAILABILITY</h4>
+    <h4>VOLUNTEER AVAILABILITY</h4>
     <label for="morning">Morning</label>
     <input type="checkbox" name="morning" ng-model="nc.searchObject.morning">
     <label for="afternoon">Afternoon</label>
