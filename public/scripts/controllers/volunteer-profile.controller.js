@@ -113,7 +113,10 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
         }).then(function(response){
           console.log('insert about me successful');
           getVolunteer();
-          swal('Updated!');
+          swal('Success!',
+          '"About Me" section updated',
+          'success'
+        );
           // alert('"About Me" updates saved!');
         })
       })
@@ -137,7 +140,10 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
         }).then(function(response){
           console.log('insert skill successful');
           getSkills();
-          alert('Skill added!');
+          swal('Success!',
+          'Your skills are updated',
+          'success'
+        );
         })
       })
     } else {
@@ -161,7 +167,10 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
         }).then(function(response){
           console.log('insert cause successful');
           getCauses();
-          alert('Cause added!');
+          swal('Success!',
+          'Your causes are updated',
+          'success'
+        );
         })
       })
     } else {
@@ -185,7 +194,10 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
         }).then(function(response){
           console.log('update availability successful');
           getAvailability();
-          alert('Availability updates saved!');
+          swal('Success!',
+          'Your availability is updated',
+          'success'
+        );
         })
       })
     } else {
