@@ -19,7 +19,12 @@
     <label for="open">Open Availability</label>
     <input type="checkbox" name="open" ng-model="nc.searchObject.open"><br>
     <button ng-click="nc.searchVolunteers()" type="button" name="button" class="btn btn-primary" id="searchButton">Search</button>
-    {{nc.volunteerList.list[0].name}}
-    {{nc.volunteerList.list[0].bio}}
   </div>
+</form>
+
+<form>
+<div class="container" id="searchResults">
+  <h4>{{nc.volunteerList.list[0].name}}</h4>
+  <p>{{nc.volunteerList.list[0].bio}}</p>
+</div>
 </form>

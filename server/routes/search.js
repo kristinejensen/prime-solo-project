@@ -41,8 +41,8 @@ router.get('/volunteer', function (req, res) {
           res.send(result.rows);
         }
       });
-    } // end of else
-}) //end of pg.connect
-}); // end of router.get
+    }
+})
+});
 
 module.exports = router;

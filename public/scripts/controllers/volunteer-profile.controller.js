@@ -10,15 +10,8 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.volunteerCauses = {};
   self.availabilityData = {};
 
-  getVolunteer();
-  getSkills();
-  getCauses();
-  getAvailability();
 
   auth.$onAuthStateChanged(getVolunteer);
-  auth.$onAuthStateChanged(getSkills);
-  auth.$onAuthStateChanged(getAvailability);
-  auth.$onAuthStateChanged(getCauses);
 
   //populates volunteer profile information on page load
   function getVolunteer(){
@@ -33,6 +26,9 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           self.volunteerProfile = response.data;
+          getSkills();
+          getAvailability();
+          getCauses();
         })
       })
     } else {
@@ -229,7 +225,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
     $location.url('/home');
   }
 
-//accesses information from public API
+  //accesses information from public API
   self.skills = DataFactory.skills;
   self.causes = DataFactory.causes;
 
