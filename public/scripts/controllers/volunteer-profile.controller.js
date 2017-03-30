@@ -185,7 +185,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
             id_token: idToken
           }
         }).then(function(response){
-          console.log('insert availability successful');
+          console.log('update availability successful');
           getAvailability();
           alert('Availability updates saved!');
         })

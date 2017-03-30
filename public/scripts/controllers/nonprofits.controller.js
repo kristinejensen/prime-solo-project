@@ -9,12 +9,12 @@ app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFac
     var params = {
       skill: self.searchObject.skill.id,
       cause: self.searchObject.cause.id,
-      morningAvailability: self.searchObject.morning,
-      afternoonAvailability: self.searchObject.afternoon,
-      eveningAvailability: self.searchObject.evening,
-      weekdayAvailability: self.searchObject.weekdays,
-      weekendAvailability: self.searchObject.weekends,
-      openAvailability: self.searchObject.open
+      morning: self.searchObject.morning,
+      afternoon: self.searchObject.afternoon,
+      evening: self.searchObject.evening,
+      weekday: self.searchObject.weekdays,
+      weekend: self.searchObject.weekends,
+      open: self.searchObject.open
     };
     $http({
       method: 'GET',
@@ -26,15 +26,6 @@ app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFac
     });
   }; //end of searchVolunteers function
 
-
-    // {{nc.searchObject.skill.id}}
-    // {{nc.searchObject.cause.id}}
-    // {{nc.searchObject.morning}}
-    // {{nc.searchObject.afternoon}}
-    // {{nc.searchObject.evening}}
-    // {{nc.searchObject.weekdays}}
-    // {{nc.searchObject.weekends}}
-    // {{nc.searchObject.open}}
 
     //accesses information from public API
       self.skills = DataFactory.skills;

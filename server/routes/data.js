@@ -148,7 +148,7 @@ router.put('/volunteer/availability/:id', function (req, res) {
   var volunteerId = req.params.id;
   var availabilityObject = req.body;
   pg.connect(connectionString, function (err, client, done) {
-    client.query('UPDATE availability SET morning=$1, afternoon=$2, evening=$3, weekdays=$4, weekends=$5, open=$6, volunteer_id=$7;',
+    client.query('UPDATE availability SET morning=$1, afternoon=$2, evening=$3, weekdays=$4, weekends=$5, open=$6 WHERE volunteer_id=$7;',
     [availabilityObject.morning, availabilityObject.afternoon, availabilityObject.evening, availabilityObject.weekdays, availabilityObject.weekends, availabilityObject.open, volunteerId], function (err, result) {
       done();
       if (err) {
