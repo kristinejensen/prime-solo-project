@@ -3,6 +3,10 @@
   margin-bottom: 10px;
 }
 
+.search-menu {
+  margin-bottom: 20px;
+}
+
 #volunteersButton {
   margin-top: 30px;
   margin-bottom: 10px;
@@ -14,9 +18,14 @@
 }
 
 #searchButton {
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 60px;
 }
 
 #searchResults {
   margin-top: 20px;
+}
+
+#nonprofitsPageHeader {
+  margin-bottom: 60px;
 }

@@ -27,6 +27,7 @@ app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFac
       swal('Sorry...',
       'We did not find any matching volunteers'
     );
+    self.searchResultsMessage = "Your Volunteer Matches"
     });
   };
 
