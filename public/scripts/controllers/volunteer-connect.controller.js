@@ -3,7 +3,7 @@ app.controller('VolunteerConnectController', ['DataFactory', '$routeParams', fun
 
   console.log($routeParams);
 
-  self.currentPup=PupFactory.currentPup;
-  self.getPup=PupFactory.getPup($routeParams.id);
+  self.currentVolunteer=DataFactory.currentVolunteer;
+  self.getVolunteer=DataFactory.getVolunteer($routeParams.id);
 
 }]);

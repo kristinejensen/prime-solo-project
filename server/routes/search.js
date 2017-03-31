@@ -45,4 +45,18 @@ router.get('/volunteer', function (req, res) {
   })
 });
 
+router.get('/volunteer/result/:id', function (req, res){
+  console.log('individual result display hit');
+  var volunteerId = req.params.id;
+  console.log(volunteerId);
+  pg.connect(connectionString, function (err, client, done){
+    if(err){
+      console.log('Error connecting to db to get individual volunteer details', err);
+      res.sendStatus(500);
+    }else{
+      client.query('SELECT * FROM volunteers')
+    }
+  })
+})
+
 module.exports = router;
