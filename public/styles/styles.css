@@ -15,6 +15,11 @@
   font-size: 16px;
 }
 
+.remove {
+  color: white;
+  margin-left: 10px;
+}
+
 #volunteersButton {
   margin-top: 30px;
   margin-bottom: 10px;

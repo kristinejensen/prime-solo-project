@@ -22,6 +22,11 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'VolunteerProfileController',
     controllerAs: 'vp'
   })
+  .when('/views/:id', {
+    templateUrl: 'views/volunteer-connect.html',
+    controller: 'VolunteerConnectController',
+    controllerAs: 'vcc'
+  })
   .otherwise({
     redirectTo: 'home'
   })

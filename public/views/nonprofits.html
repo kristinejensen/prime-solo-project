@@ -38,9 +38,7 @@
   <h3 id="resultsDisplay">{{nc.searchResultsMessage}}</h3>
   </div>
 </div>
-<div class="container" id="searchResults">
-  <h4>{{nc.volunteerList.list[0].name}}</h4>
-  <p id="resultOne">{{nc.volunteerList.list[0].bio}}</p>
-  <h4>{{nc.volunteerList.list[1].name}}</h4>
-  <p>{{nc.volunteerList.list[1].bio}}</p>
+<div ng-repeat="volunteer in nc.volunteerList.list"class="container" id="searchResults">
+  <h4>{{volunteer.name}}</h4>
+  <p>{{volunteer.bio}}</p>
 </div>
