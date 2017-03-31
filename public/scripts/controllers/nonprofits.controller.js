@@ -23,11 +23,13 @@ app.controller('NonprofitController', ['DataFactory', '$http' , function(DataFac
     }).then(function (response){
       console.log(response.data);
       self.volunteerList.list = response.data;
-      if(self.volunteerList.list.length == 0)
-      swal('Sorry...',
-      'We did not find any matching volunteers'
-    );
-    self.searchResultsMessage = "Volunteer Matches"
+      if(self.volunteerList.list.length == 0){
+        swal('Sorry...',
+        'We did not find any matching volunteers'
+      );
+    } else {
+      self.searchResultsMessage = "Volunteer Matches"
+    }
     });
   };
 
