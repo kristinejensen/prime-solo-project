@@ -43,7 +43,11 @@
 }
 
 #resultsDisplay {
-    border-left: 6px solid #E27A3F;
-    background-color: #DF5A49;
+    border-left: 10px solid #45B29D;
+    background-color: #45B29D;
     color: white;
+}
+
+#resultOne {
+  margin-bottom: 30px;
 }

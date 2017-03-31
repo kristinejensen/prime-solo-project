@@ -27,6 +27,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
           }
         }).then(function(response){
           self.volunteerProfile = response.data;
+          console.log(self.volunteerProfile);
           getSkills();
           getAvailability();
           getCauses();

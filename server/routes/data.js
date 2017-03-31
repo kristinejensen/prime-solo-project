@@ -35,6 +35,7 @@ router.get('/volunteer', function (req, res) {
         });
       } else {
         res.send(result.rows[0]);
+        console.log(result.rows[0]);
       }
     });
   });
