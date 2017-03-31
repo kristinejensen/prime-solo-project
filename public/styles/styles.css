@@ -1,3 +1,7 @@
+/*body {
+  font-family: Tahoma;
+}*/
+
 .save {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -5,6 +9,10 @@
 
 .search-menu {
   margin-bottom: 20px;
+}
+
+.home-text {
+  font-size: 16px;
 }
 
 #volunteersButton {
@@ -19,7 +27,7 @@
 
 #searchButton {
   margin-top: 10px;
-  margin-bottom: 60px;
+  margin-bottom: 25px;
 }
 
 #searchResults {
@@ -28,4 +36,14 @@
 
 #nonprofitsPageHeader {
   margin-bottom: 60px;
+}
+
+#aboutMe {
+  margin-bottom: 20px;
+}
+
+#resultsDisplay {
+    border-left: 6px solid #E27A3F;
+    background-color: #DF5A49;
+    color: white;
 }
