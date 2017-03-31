@@ -39,6 +39,6 @@
   </div>
 </div>
 <div ng-repeat="volunteer in nc.volunteerList.list"class="container" id="searchResults">
-  <h4>{{volunteer.name}}</h4>
+  <h4><a ng-href="#!views/{{volunteer.volunteer_id}}">{{volunteer.name}}</a></h4>
   <p>{{volunteer.bio}}</p>
 </div>
