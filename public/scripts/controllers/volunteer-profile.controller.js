@@ -11,6 +11,7 @@ app.controller('VolunteerProfileController', ['$firebaseAuth', '$http', '$locati
   self.volunteerCauses = {};
   self.availabilityData = {};
 
+  getVolunteer();
 
   auth.$onAuthStateChanged(getVolunteer);
 
