@@ -54,9 +54,17 @@ router.get('/volunteer/result/:id', function (req, res){
       console.log('Error connecting to db to get individual volunteer details', err);
       res.sendStatus(500);
     }else{
-      client.query('SELECT * FROM volunteers')
+      client.query('SELECT * FROM volunteers WHERE id=$1;', [volunteerId], function(errorMakingQuery, result){
+        done();
+        if(err){
+          console.log('Error completing db search query to display individual volunteer', err);
+          res.sendStatus(500);
+        }else{
+          res.send(result.rows);
+        }
+      });
     }
   })
-})
+});
 
 module.exports = router;

@@ -27,6 +27,7 @@ app.factory('DataFactory', ['$http', function($http){
         })
   };
 
+  // function to display individual volunteer search results
   function getVolunteer(volunteerId){
     $http({
       method: 'GET',
@@ -34,6 +35,9 @@ app.factory('DataFactory', ['$http', function($http){
     }).then(function (response) {
       console.log(response.data);
       currentVolunteer.details = response.data;
+      // getSkills();
+      // getAvailability();
+      // getCauses();
     });
   };
 
