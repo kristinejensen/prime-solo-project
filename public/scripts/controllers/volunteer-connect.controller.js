@@ -1,7 +1,20 @@
-app.controller('VolunteerConnectController', ['DataFactory', '$routeParams', function(DataFactory, $routeParams) {
+app.controller('VolunteerConnectController', ['DataFactory', '$routeParams', '$http', function(DataFactory, $routeParams, $http) {
   var self = this;
 
-  console.log($routeParams);
+  // console.log($routeParams);
+
+  self.sendEmail = function(){
+    console.log('send email button clicked');
+    console.log(self.currentVolunteer.details[0]);
+    $http({
+      method: 'POST',
+      url: '/search/send',
+      data: self.currentVolunteer.details[0]
+    }).then(function(response){
+      console.log(response);
+    })
+  // self.heroReport = {};
+};
 
   self.currentVolunteer=DataFactory.currentVolunteer;
   self.getVolunteer=DataFactory.getVolunteer($routeParams.id);

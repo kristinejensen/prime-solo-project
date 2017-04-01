@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
+var nodemailer = require('nodemailer');
 var connectionString = require('../modules/database-config');
 
 //voluteer search query
@@ -65,6 +66,35 @@ router.get('/volunteer/result/:id', function (req, res){
       });
     }
   })
+});
+
+router.post('/send', function(req, res){
+  var emailBody = req.body;
+
+  var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'peacefulmountain2@gmail.com',
+      pass: '12341234!'
+    }
+  });
+
+  var mailOptions = {
+    from: req.body.sender,
+    to: req.body.email,
+    subject: req.body.subject,
+    text: req.body.message
+  }
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+      console.log(error);
+      res.sendStatus(500);
+    }else{
+      console.log('Message sent: ' + info.response);
+      res.sendStatus(200);
+    };
+  });
 });
 
 module.exports = router;
