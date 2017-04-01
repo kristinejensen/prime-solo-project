@@ -35,9 +35,6 @@ app.factory('DataFactory', ['$http', function($http){
     }).then(function (response) {
       console.log(response.data);
       currentVolunteer.details = response.data;
-      // getSkills();
-      // getAvailability();
-      // getCauses();
     });
   };
 
