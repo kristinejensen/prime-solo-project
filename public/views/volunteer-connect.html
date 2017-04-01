@@ -1,2 +1,42 @@
-{{vcc.currentVolunteer.details[0].name}}
-{{vcc.currentVolunteer.details[0].bio}}
+<h4>{{vcc.currentVolunteer.details[0].name}}</h4>
+<p>{{vcc.currentVolunteer.details[0].bio}}</p>
+
+<h4 class="text-center" id="matchMessage">Think your cause is a match?<br>Send an email to start the conversation.</h4>
+
+<form>
+  <div class="container">
+    <div class="form-group row">
+      <label for="recipient" class="col-sm-2 col-form-label">RECIPIENT</label>
+      <div class="col-sm-10">
+        <input ng-model="vcc.currentVolunteer.details[0].email" type="text" name="recipient" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="form-group row">
+      <label for="sender" class="col-sm-2 col-form-label">SENDER</label>
+      <div class="col-sm-10">
+        <input ng-model="vcc.currentVolunteer.details[0].sender"type="text" name="sender" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="form-group row">
+      <label for="subject" class="col-sm-2 col-form-label">SUBJECT</label>
+      <div class="col-sm-10">
+        <input ng-model="vcc.currentVolunteer.details[0].subject"type="text" name="subject" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="form-group row">
+      <label for="message" class="col-sm-2 col-form-label">MESSAGE</label>
+      <div class="col-sm-10">
+        <textarea ng-model="vcc.currentVolunteer.details[0].message" type="text" name="message" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <button ng-click="vcc.sendEmail()" type="button" name="button" class="btn btn-primary btn-md save">Send Email</button>
+  </div>
+</form>
