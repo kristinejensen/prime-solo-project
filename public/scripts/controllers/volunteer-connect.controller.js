@@ -12,8 +12,12 @@ app.controller('VolunteerConnectController', ['DataFactory', '$routeParams', '$h
       data: self.currentVolunteer.details[0]
     }).then(function(response){
       console.log(response);
+      swal(
+        'Success!',
+        'Your email has been sent.',
+        'success'
+      );
     })
-  // self.heroReport = {};
 };
 
   self.currentVolunteer=DataFactory.currentVolunteer;
