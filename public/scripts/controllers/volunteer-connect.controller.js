@@ -17,6 +17,10 @@ app.controller('VolunteerConnectController', ['DataFactory', '$routeParams', '$h
         'Your email has been sent.',
         'success'
       );
+      self.currentVolunteer.details[0].email = "";
+      self.currentVolunteer.details[0].sender = "";
+      self.currentVolunteer.details[0].subject = "";
+      self.currentVolunteer.details[0].message = "";
     })
 };
 
