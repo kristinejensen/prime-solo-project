@@ -58,6 +58,18 @@
 }
 
 #matchMessage {
-  margin-top: 30px;
+  margin-top: 50px;
   margin-bottom: 30px;
+}
+
+#volunteerResultDisplay {
+  background-color: #45B29D;
+  color: white;
+  padding-bottom: 10px;
+  border-radius: 15px;
+}
+
+#bioText {
+  font-size: 16px;
+  font-style: italic;
 }

@@ -1,6 +1,6 @@
-<div class="container">
-  <h3>{{vcc.currentVolunteer.details[0].name}}</h3>
-  <p>{{vcc.currentVolunteer.details[0].bio}}</p>
+<div class="container" id="volunteerResultDisplay">
+  <h3>About {{vcc.currentVolunteer.details[0].name}}</h3>
+  <p id="bioText">"{{vcc.currentVolunteer.details[0].bio}}"</p>
 </div>
 <h4 class="text-center" id="matchMessage">Think your cause is a match?<br>Send an email to start the conversation.</h4>
 <form>
@@ -37,6 +37,6 @@
     </div>
   </div>
   <div class="container">
-    <button ng-click="vcc.sendEmail()" type="button" name="button" class="btn btn-primary btn-md save">Send Email</button>
+    <button ng-click="vcc.sendEmail()" type="button" name="button" class="btn btn-primary btn-md">Send Email</button>
   </div>
 </form>
